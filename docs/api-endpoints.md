@@ -8,13 +8,13 @@
 
 ### Users
 
-- `GET /users/new`
+- `GET /users/new` aliased to `GET /signup`
 - `POST /users`
 - `PATCH /users`
 
 ### Session
 
-- `GET /session/new`
+- `GET /session/new` aliased to `GET /login`
 - `POST /session`
 - `DELETE /session`
 
