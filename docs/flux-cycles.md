@@ -16,7 +16,7 @@ what you'll need to do.
 ### Stocks API Request Actions
 
 * `fetchAllStocks`
-  0. invoked from `StocksIndex` `didMount`/`willReceiveProps`
+  0. invoked from `StocksIndex` `componentDidMount`/`willReceiveProps`
   0. `GET /api/stock_list_items` is called with `current_user.id` as params.
   0. `receiveAllStocks` is set as the callback.
 
@@ -75,4 +75,59 @@ N.B. `_stocks` is an array in the stock store.
 
 
 ## StockPrice Cycle
-## StockDetails Cycles
+
+### StockPrice API Request Items
+
+* `fetchStockPrice`
+  0. invoked from `StocksIndex` `onChange`
+  0. `GET YAHOO_STOCK_PRICE_API_URL` is called with `ticker_symbol` param.
+  0. `receiveStockPrice` is set as the callback.
+  
+### StockPrices API Response Items
+
+* `receiveStockPrice`
+  0. invoked as an API callback
+  0. `StockPrice` store updates `_stockPrices` and emits change.
+
+### Store Listeners
+
+* `StocksIndex` component listens to `StockPrice` store.
+* `StockDetail` component listens to `StockPrice` store.
+
+## StockDetails Cycle
+
+### HistoricalStockPrices API Request Items
+
+* `fetchHistoricalStockPrices`
+  0. invoked from `StockDetail` `componentDidMount`/`willReceiveProps`
+  0. `GET YAHOO_HISTORICAL_STOCK_PRICE_API_URL` is called with `ticker_symbol` and `date_range` params.
+  0. `receiveHistoricalStockPrices` is set as the callback.
+
+### HistoricalStockPrices API Response Items
+
+* `receiveHistoricalStockPrices`
+  0. invoked as an API callback
+  0. `HistoricalStockPrice` store updates `_historicalStockPrices` and emits change.
+
+### Store Listeners
+
+* `StockDetail` component listens to `HistoricalStockPrice` store.
+
+## StockNews Cycle
+
+### StockNews API Request Items
+
+* `fetchStockNews`
+  0. invoked from `StockDetail` `componentDidMount`/`willReceiveProps`
+  0. `GET YAHOO_STOCK_NEWS_API_URL` is called with `ticker_symbol` param.
+  0. `receiveStockNews` is set as the callback.
+
+### StockNews API Response Items
+
+* `receiveStockNews`
+  0. invoked as an API callback
+  0. `StockNews` store updates `_stockNews` and emits change.
+
+### Store Listeners
+
+* `StockDetail` component listens to `StockNews` store.
