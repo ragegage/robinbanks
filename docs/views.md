@@ -1,22 +1,26 @@
 # View Wireframes
 
-## New User
-![new-user]
+## Sign Up
+![sign-up]
 
-## New Session
-![new-session]
+![sign-up-errors]
 
-## NotesIndex / NoteIndexItem / NoteForm
-![notes]
+## Log In
+![log-in]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+![log-in-errors]
 
-## NotebookForm
-![notebook-form]
+## StocksIndex (Watchlist) / StockIndexItem
+![index]
 
-[new-user]: ./wireframes/new_user.png
-[new-session]: ./wireframes/new_session.png
-[notes]: ./wireframes/root_notes.png
-[notebooks]: ./wireframes/root_notebooks.png
-[notebook-form]: ./wireframes/notebook_form.png
+![index-hover-delete]
+
+![index-hover-detail]
+
+[sign-up]: ./wireframes/Sign Up Page.png
+[sign-up-errors]: ./wireframes/Sign up error states.png
+[log-in]: ./wireframes/Log In Page.png
+[log-in-errors]: ./wireframes/Log in Error States.png
+[index]: ./wireframes/Index.png
+[index-hover-delete]: ./wireframes/Delete.png
+[index-hover-detail]: ./wireframes/Hover Effect.png
