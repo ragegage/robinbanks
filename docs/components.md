@@ -5,7 +5,7 @@
   * `StocksIndex`
     * `StocksIndexItem`
   * `StockDetail`
-    * `StockChart`
-      * `StockChartItem`
+    * `StockCharts`
+      * `StockChart`
     * `StockNewsIndex`
-      * `StockNewsIndexItem`
+      * `StockNewsItem`
