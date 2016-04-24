@@ -1,8 +1,8 @@
 # RobinBanks
 
-[Heroku link][heroku] **NB:** This will be a link to my production site
+[Heroku link][robinbanks]
 
-[heroku]: http://www.herokuapp.com
+[robinbanks]: http://www.robinbanks.herokuapp.com
 
 ## Minimum Viable Product
 
@@ -57,7 +57,7 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] authentication
 - [ ] user signup/signin pages
 - [ ] blank landing page after signin
-- [ ] page live on xxx.herokuapp.com
+- [ ] page live on robinbanks.herokuapp.com
 
 ### Phase 2: Stocks, List, and StockListItems Models & API (1 day)
 
