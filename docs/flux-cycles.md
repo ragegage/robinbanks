@@ -19,7 +19,7 @@
   0. `PATCH /api/stock_list_items` is called.
   0. `receiveAllStocks` is set as the callback.
 
-N.B. you can only update a stock insofar as changing its place in your `StocksIndex`; because the ordering will be done in the style of a linked list on the backend, this will require changing three `StocksIndexItem`s: the one being moved, the node that was formerly immediately before it, and the node that is now immediately before it. One `drag` event will cause three `updateStocksIndexItem` calls.
+N.B. you can only update a stock insofar as changing its place in your `StocksIndex`; because the ordering will be done in the style of a linked list on the backend, this will require changing three `StocksIndexItem`s: the one being moved, the node that was formerly immediately before it, and the node that is now immediately before it. One `drag` event will cause three `updateStocksIndexItem` calls, and after those updates are made, the updated list of stocks is returned.
 
 * `destroyStocksIndexItem`
   0. invoked from delete stock button `onClick`
@@ -27,13 +27,15 @@ N.B. you can only update a stock insofar as changing its place in your `StocksIn
   0. `PATCH /api/stock_list_items` is also called to connect any nodes that were disrupted by the removal of one.
   0. `receiveAllStocks` is set as the callback.
 
+N.B. See above re: updating the list of stocks.
+
 ### Stocks API Response Items
 
 * `receiveAllStocks`
   0. invoked from an API callback.
   0. `Stock` store replaces `_stocks` and emits change.
 
-N.B. `_stocks` is an array in the stock store.
+N.B. `_stocks` is an array.
 
 * `receiveSingleStock`
   0. invoked from an API callback.
@@ -62,8 +64,6 @@ N.B. `_stocks` is an array in the stock store.
 ### Store Listeners
 
 * `SearchBarSuggestions` component listens to `SearchSuggestion` store.
-
-
 
 ## StockPrice Cycle
 
