@@ -6,7 +6,7 @@
 
 ## Minimum Viable Product
 
-RobinBanks is a web application inspired by Robinhood that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+RobinBanks is a web application inspired by Robinhood that will be built using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
 - [ ] New account creation, login, and guest/demo login
 - [ ] Smooth, bug-free navigation
