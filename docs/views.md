@@ -17,10 +17,10 @@
 
 ![index-hover-detail]
 
-[sign-up]: ./wireframes/Sign Up Page.png
-[sign-up-errors]: ./wireframes/Sign up error states.png
-[log-in]: ./wireframes/Log In Page.png
-[log-in-errors]: ./wireframes/Log in Error States.png
-[index]: ./wireframes/Index.png
-[index-hover-delete]: ./wireframes/Delete.png
-[index-hover-detail]: ./wireframes/Hover Effect.png
+[sign-up]: ./wireframes/sign-up-page.png
+[sign-up-errors]: ./wireframes/sign-up-errors.png
+[log-in]: ./wireframes/log-in-page.png
+[log-in-errors]: ./wireframes/log-in-errors.png
+[index]: ./wireframes/index.png
+[index-hover-delete]: ./wireframes/delete.png
+[index-hover-detail]: ./wireframes/hover-effect.png
