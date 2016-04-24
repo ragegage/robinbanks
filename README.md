@@ -120,6 +120,7 @@ user interface.
 ### Bonus Features (TBD)
 - [ ] Change time window for StockCharts (reveals a different StockChart)
 - [ ] Hover over StockChart displays snapshot of price information
+- [ ] In-app reader for news articles (the other end of the links in StockNews)
 - [ ] Multiple sessions
 - [ ] Sign in with Facebook/Github/Google
 
