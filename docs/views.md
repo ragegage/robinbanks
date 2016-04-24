@@ -3,18 +3,22 @@
 ## Sign Up
 ![sign-up]
 
+### Sign Up Errors
 ![sign-up-errors]
 
 ## Log In
 ![log-in]
 
+### Log In Errors
 ![log-in-errors]
 
 ## StocksIndex (Watchlist) / StockIndexItem
 ![index]
 
+### Deleting an item off of a list
 ![index-hover-delete]
 
+### Hovering over the chart shows price details
 ![index-hover-detail]
 
 [sign-up]: ./wireframes/sign-up-page.png
