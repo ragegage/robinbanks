@@ -18,7 +18,8 @@
   0. invoked from `drag` event inside `StocksIndex`
   0. `PATCH /api/stock_list_items` is called.
   0. `receiveAllStocks` is set as the callback.
-  N.B. you can only update a stock insofar as changing its place in your `StocksIndex`; because the ordering will be done in the style of a linked list on the backend, this will require changing three `StocksIndexItem`s: the one being moved, the node that was formerly immediately before it, and the node that is now immediately before it. One `drag` event will cause three `updateStocksIndexItem` calls.
+
+N.B. you can only update a stock insofar as changing its place in your `StocksIndex`; because the ordering will be done in the style of a linked list on the backend, this will require changing three `StocksIndexItem`s: the one being moved, the node that was formerly immediately before it, and the node that is now immediately before it. One `drag` event will cause three `updateStocksIndexItem` calls.
 
 * `destroyStocksIndexItem`
   0. invoked from delete stock button `onClick`
@@ -31,6 +32,7 @@
 * `receiveAllStocks`
   0. invoked from an API callback.
   0. `Stock` store replaces `_stocks` and emits change.
+
 N.B. `_stocks` is an array in the stock store.
 
 * `receiveSingleStock`
