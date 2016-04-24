@@ -20,34 +20,29 @@
 
 ## JSON API
 
-### Notes
+### StockListItems
 
-- `GET /api/notes`
-  - Notes index/search
-  - accepts `tag_name` query param to list notes by tag
-  - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `GET /api/stock_list_items`
+- `POST /api/stock_list_items`
+- `GET /api/stock_list_items/:id`
+- `PATCH /api/stock_list_items/:id`
+- `DELETE /api/stock_list_items/:id`
 
-### Notebooks
+### Stocks
 
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
-  - accepts pagination params (if I get there)
+- `GET /api/stocks`
+  - Only used for search purposes and to provide an id reference for `POST` requests to `api/stock_list_items`
 
-### Tags
+## External JSON API
 
-- A note's tags will be included in the note show template
-- `GET /api/tags`
-  - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
-  - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
-  name
+### StockPrice
+
+- `GET YAHOO_STOCK_PRICE_API_URL`
+
+### HistoricalStockPrices
+
+- `GET YAHOO_HISTORICAL_STOCK_PRICE_API_URL`
+
+### StockNews
+
+- `GET YAHOO_STOCK_NEWS_API_URL`
