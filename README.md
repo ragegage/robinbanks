@@ -1,34 +1,34 @@
 # FresherNote
 
-[Heroku link][heroku] **NB:** This should be a link to your production site
+[Heroku link][heroku] **NB:** This will be a link to my production site
 
 [heroku]: http://www.herokuapp.com
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+RobinBanks is a web application inspired by Robinhood that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
 - [ ] New account creation, login, and guest/demo login
 - [ ] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
-- [ ] The minimally necessary features for an Evernote-inspired site: note creation and saving, note editing, and notes organized into notebooks
+- [ ] Minimally necessary features for a Robinhood-inspired site: a watchlist of stocks, watchlist editing (through addition and removal of stocks), and company information including latest and historical stock prices and relevant news.
 - [ ] Hosting on Heroku
 - [ ] CSS styling that is satisfactorily visually appealing
-- [ ] A production README, replacing this README (**NB**: check out the [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md) -- you'll write this later)
+- [ ] A production README, replacing this README (at least as good as the one at [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md))
 
 ## Product Goals and Priorities
 
-FresherNote will allow users to do the following:
+RobinBanks will allow users to do the following:
 
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
 - [ ] Create an account (MVP)
 - [ ] Log in / Log out, including as a Guest/Demo User (MVP)
-- [ ] Create, read, edit, and delete notes (MVP)
-- [ ] Organize notes within Notebooks (MVP)
-- [ ] Tag notes with multiple tags (expected feature, but not MVP)
-- [ ] Apply complex styling to notes while editing (expected feature, but not MVP)
+- [ ] View stock price information on watchlist (MVP)
+- [ ] View stock information (prices and relevant news) for an individual stock (MVP)
+- [ ] Organize stocks within watchlist (MVP)
+- [ ] Add and delete stocks from watchlist (MVP)
 
 ## Design Docs
 * [View Wireframes][views]
