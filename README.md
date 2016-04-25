@@ -56,13 +56,12 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] create `User` model
 - [ ] authentication
 - [ ] user signup/signin pages
-- [ ] blank landing page after signin
+- [ ] blank landing page after signin with `logout` link
 - [ ] page live on robinbanks.herokuapp.com
 
 ### Phase 2: Stocks, List, and StockListItems Models & API (1 day)
 
-**Objective:** Stocks can be read through the API.
-**Objective:** StockListItems can be created, read, edited and destroyed through
+**Objective:** Stocks and StockListItems can be created, read, edited and destroyed through
 the API.
 
 - [ ] create `Stock` model
@@ -71,49 +70,74 @@ the API.
 - [ ] seed the database with test data
 - [ ] CRUD API for models (`StocksController`, `StockListItemsController`)
 - [ ] generation of ordered array of stockListItems (from a linked list)
-- [ ] jBuilder views for stocks & stockListItems
-- [ ] test out API interaction with Postman.
+- [ ] jBuilder views for stocks, stockListItems
+- [ ] test out API interaction with Postman
 
-### Phase 3: APIUtils (1 day)
+### Phase 3: Internal APIUtils (.5 day)
 
-**Objective:** APIUtils provide methods to interact with internal and external APIs.
+**Objective:** APIUtils provide methods to interact with internal APIs.
 
 - [ ] set up APIUtils to interact with internal APIs
-- [ ] test internal API interaction in the console.
-- [ ] set up APIUtils to interact with external APIs
-- [ ] test external API interaction in the console.
+- [ ] test internal API interaction in the console
 
-### Phase 4: Flux Architecture and Router (2 days)
+### Phase 4: Flux Architecture and Router; implement StockList (.5 day)
 
-**Objective:** Stocks and StockListItems can be created, read, edited and destroyed with the
+**Objective:** StockListItems can be read, edited and destroyed with the
 user interface.
 
 - [ ] setup the flux loop with skeleton files
 - [ ] setup React Router
-- implement each stock component, building out the flux loop as needed.
-  - [ ] implement `StocksIndex`
-  - [ ] implement `StockSearchBar`
-  - implement basics of `StockDetail`
-    - [ ] display current stock price information
-    - [ ] acquire HistoricalStockPrice information
-    - [ ] acquire StockNews information
-    - [ ] create skeletons for StockCharts and StockNews
+- [ ] implement `StocksIndex` (without `StockPrice`s)
 
-### Phase 5: Implement StockDetail MVP (2 days)
+### Phase 5: Outfit Basic Site with Styling (.5 day)
 
-**Objective:** StockDetail shows StockCharts and StockNews
-
-- [ ] implement chart plugin (Rickshaw) with HistoricalStockPrice data
-- [ ] implement StockNewsItems with StockNews data
-
-### Phase 6: Outfit Site with Styling (2 days)
-
-**Objective:** All pages (including signup/signin) will look good and follow the style guide.
+**Objective:** Basic pages (including signup/signin, StocksIndex) will look good and follow the style guide.
 
 - [ ] implement basic style guide
 - [ ] position elements on the page
 - [ ] style StocksIndex
+
+### Phase 6: StockSearch Flux Architecture and Router (.5 day)
+
+**Objective:** StockListItems can be created with the user interface.
+
+- [ ] implement `StockSearchBar`
+
+### Phase 7: Outfit Search with Styling (.5 day)
+
+**Objective:** Search bar and results will look good and follow the style guide.
+
 - [ ] style StockSearchBar and SearchBarSuggestions
+
+### Phase 6: External APIUtils (.5 day)
+
+**Objective:** APIUtils provide methods to interact with external APIs.
+
+- [ ] set up APIUtils to interact with external APIs
+- [ ] test external API interaction in the console
+
+### Phase 7: Flesh out Flux Architecture (1 day)
+
+**Objective:** Stocks and StockListItems display external data through the user interface.
+
+- implement basics of `StockDetail`
+  - [ ] display current stock price information
+  - [ ] acquire HistoricalStockPrice information
+  - [ ] acquire StockNews information
+  - [ ] create skeletons for StockCharts and StockNews
+
+### Phase 8: Implement StockDetail MVP (1.5 days)
+
+**Objective:** StockDetail shows StockCharts and StockNews
+
+- [ ] implement chart plugin (Rickshaw?) with HistoricalStockPrice data
+- [ ] implement StockNewsItems with StockNews data
+
+### Phase 9: Outfit Entire Site with Styling (1.5 days)
+
+**Objective:** All pages will look good and follow the style guide.
+
+- [ ] position elements on the page
 - [ ] style StockChart
 - [ ] style StockNews
 
