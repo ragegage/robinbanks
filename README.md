@@ -109,14 +109,14 @@ user interface.
 
 - [ ] style StockSearchBar and SearchBarSuggestions
 
-### Phase 6: External APIUtils (.5 day)
+### Phase 8: External APIUtils (.5 day)
 
 **Objective:** APIUtils provide methods to interact with external APIs.
 
 - [ ] set up APIUtils to interact with external APIs
 - [ ] test external API interaction in the console
 
-### Phase 7: Flesh out Flux Architecture (1 day)
+### Phase 9: Flesh out Flux Architecture (1 day)
 
 **Objective:** Stocks and StockListItems display external data through the user interface.
 
@@ -126,14 +126,14 @@ user interface.
   - [ ] acquire StockNews information
   - [ ] create skeletons for StockCharts and StockNews
 
-### Phase 8: Implement StockDetail MVP (1.5 days)
+### Phase 10: Implement StockDetail MVP (1.5 days)
 
 **Objective:** StockDetail shows StockCharts and StockNews
 
 - [ ] implement chart plugin (Rickshaw?) with HistoricalStockPrice data
 - [ ] implement StockNewsItems with StockNews data
 
-### Phase 9: Outfit Entire Site with Styling (1.5 days)
+### Phase 11: Outfit Entire Site with Styling (1.5 days)
 
 **Objective:** All pages will look good and follow the style guide.
 
