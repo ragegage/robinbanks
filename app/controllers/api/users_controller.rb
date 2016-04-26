@@ -1,29 +1,29 @@
 class Api::UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = current_user
     render :show
   end
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.login!
+      login! @user
       status = 200
-      render :show status: status
+      render :show, status: status
     else
       status = 500
       @errors = @user.errors.full_messages
-      render :show status: status
+      render :show, status: status
     end
   end
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
       status = 200
-      render :show status: status
+      render :show, status: status
     else
       status = 500
       @errors = @user.errors.full_messages
-      render :show status: status
+      render :show, status: status
     end
   end
 

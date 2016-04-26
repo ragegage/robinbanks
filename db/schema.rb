@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426180125) do
+ActiveRecord::Schema.define(version: 20160426210616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "lists", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "list_head"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id", unique: true, using: :btree
+
+  create_table "stock_list_items", force: :cascade do |t|
+    t.integer  "list_id",            null: false
+    t.integer  "stock_id",           null: false
+    t.integer  "next_stock_list_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "stock_list_items", ["list_id"], name: "index_stock_list_items_on_list_id", using: :btree
+  add_index "stock_list_items", ["stock_id"], name: "index_stock_list_items_on_stock_id", using: :btree
+
+  create_table "stocks", force: :cascade do |t|
+    t.string   "ticker_symbol", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "stocks", ["ticker_symbol"], name: "index_stocks_on_ticker_symbol", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
