@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+#ignore sketch file
+/docs/wireframes/GageProjRobinbanks.sketch
