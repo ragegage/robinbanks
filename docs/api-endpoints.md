@@ -8,46 +8,47 @@
 
 ### Users
 
-- `GET /users/new`
+- `GET /users/new` aliased to `GET /signup`
 - `POST /users`
 - `PATCH /users`
 
 ### Session
 
-- `GET /session/new`
+- `GET /session/new` aliased to `GET /login`
 - `POST /session`
 - `DELETE /session`
 
 ## JSON API
 
-### Notes
+### StockListItems
 
-- `GET /api/notes`
-  - Notes index/search
-  - accepts `tag_name` query param to list notes by tag
-  - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `GET /api/stock_list_items`
+- `POST /api/stock_list_items`
+- `GET /api/stock_list_items/:id`
+- `PATCH /api/stock_list_items/:id`
+- `DELETE /api/stock_list_items/:id`
 
-### Notebooks
+### Stocks
 
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
-  - accepts pagination params (if I get there)
+- `GET /api/stocks`
+  - Only used for search purposes and to provide an id reference for `POST` requests to `api/stock_list_items`
 
-### Tags
+## External JSON API
 
-- A note's tags will be included in the note show template
-- `GET /api/tags`
-  - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
-  - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
-  name
+### StockPrice
+
+- `GET YAHOO_STOCK_PRICE_API_URL`
+
+NB: potentially https://finance.yahoo.com/webservice/v1/symbols/STOCK_TICKER/quote?format=json or https://finance.yahoo.com/webservice/v1/symbols/STOCK_TICKER/quote?format=json&view=detail
+
+### HistoricalStockPrices
+
+- `GET YAHOO_HISTORICAL_STOCK_PRICE_API_URL`
+
+NB: potentially https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%20%22***STOCK_TICKER***%22%20and%20startDate%20%3D%20%22***START_DATE***%22%20and%20%20endDate%20%3D%20%22***END_DATE***%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys (a YQL REST API with dates in the form "2016-03-24")
+
+### StockNews
+
+- `GET YAHOO_STOCK_NEWS_API_URL`
+
+NB: potentially http://finance.yahoo.com/rss/headline?s=STOCK_TICKER or http://finance.yahoo.com/rss/industry?s=STOCK_TICKER

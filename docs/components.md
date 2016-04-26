@@ -2,12 +2,10 @@
 
 * `App`
   * `SearchIndex`
-  * `NotebooksIndex`
-    * `NotebookIndexItem`
-  * `NotebookForm`
-  * `NotesIndex`
-    * `NoteForm`
-    * `NoteIndexItem`
-  * `NoteDetail`
-    * `NoteTags`
-    * `NoteEditArea`
+  * `StocksIndex`
+    * `StocksIndexItem`
+  * `StockDetail`
+    * `StockCharts`
+      * `StockChart`
+    * `StockNewsIndex`
+      * `StockNewsItem`

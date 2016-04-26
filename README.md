@@ -1,8 +1,8 @@
 # RobinBanks
 
-[Heroku link][heroku] **NB:** This will be a link to my production site
+[Heroku link][robinbanks]
 
-[heroku]: http://www.herokuapp.com
+[robinbanks]: http://www.robinbanks.herokuapp.com
 
 ## Minimum Viable Product
 
@@ -11,7 +11,7 @@ RobinBanks is a web application inspired by Robinhood that will be built using R
 - [ ] New account creation, login, and guest/demo login
 - [ ] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
-- [ ] Minimally necessary features for a Robinhood-inspired site: a watchlist of stocks, watchlist editing (through addition and removal of stocks), and company information including latest and historical stock prices and relevant news.
+- [ ] Minimally necessary features for a Robinhood-inspired site: a watchlist of stocks, watchlist editing (addition, removal, and reordering of stocks), and company information including latest and historical stock prices and relevant news.
 - [ ] Hosting on Heroku
 - [ ] CSS styling that is satisfactorily visually appealing
 - [ ] A production README, replacing this README (at least as good as the one at [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md))
@@ -26,10 +26,10 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] Create an account (MVP)
 - [ ] Log in / Log out, including as a Guest/Demo User (MVP)
 - [ ] View stock price information on watchlist (MVP)
-- [ ] View stock information (prices and relevant news) for an individual stock (MVP)
 - [ ] Organize stocks within watchlist (MVP)
 - [ ] Add and delete stocks to/from watchlist (MVP)
 - [ ] Search for stocks by ticker symbol (MVP)
+- [ ] View stock information (prices and relevant news) for an individual stock (MVP)
 - [ ] Change time window for an individual stock's price information (non-MVP, but expected)
 - [ ] On hover, display snapshot of price information for an individual stock at a point in time (non-MVP, but expected)
 
@@ -48,7 +48,7 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 ## Implementation Timeline
 
-### Phase 1: Backend setup and User Authentication (0.5 days)
+### Phase 1: Backend setup, User Authentication, and live on Heroku (1 day)
 
 **Objective:** Functioning rails project with Authentication
 
@@ -56,92 +56,97 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] create `User` model
 - [ ] authentication
 - [ ] user signup/signin pages
-- [ ] blank landing page after signin
+- [ ] blank landing page after signin with `logout` link
+- [ ] page live on robinbanks.herokuapp.com
 
-### Phase 2: Notes Model, API, and basic APIUtil (1.5 days)
+### Phase 2: Stocks, List, and StockListItems Models & API (1 day)
 
-**Objective:** Notes can be created, read, edited and destroyed through
+**Objective:** Stocks and StockListItems can be created, read, edited and destroyed through
 the API.
 
-- [ ] create `Note` model
-- [ ] seed the database with a small amount of test data
-- [ ] CRUD API for notes (`NotesController`)
-- [ ] jBuilder views for notes
-- [ ] setup Webpack & Flux scaffold
-- [ ] setup `APIUtil` to interact with the API
-- [ ] test out API interaction in the console.
+- [ ] create `Stock` model
+- [ ] create `List` model
+- [ ] create `StockListItem` model
+- [ ] seed the database with test data
+- [ ] CRUD API for models (`StocksController`, `StockListItemsController`)
+- [ ] generation of ordered array of stockListItems (from a linked list)
+- [ ] jBuilder views for stocks, stockListItems
+- [ ] test out API interaction with Postman
 
-### Phase 3: Flux Architecture and Router (1.5 days)
+### Phase 3: Internal APIUtils (.5 day)
 
-**Objective:** Notes can be created, read, edited and destroyed with the
+**Objective:** APIUtils provide methods to interact with internal APIs.
+
+- [ ] set up APIUtils to interact with internal APIs
+- [ ] test internal API interaction in the console
+
+### Phase 4: Flux Architecture and Router; implement StockList (.5 day)
+
+**Objective:** StockListItems can be read, edited and destroyed with the
 user interface.
 
 - [ ] setup the flux loop with skeleton files
 - [ ] setup React Router
-- implement each note component, building out the flux loop as needed.
-  - [ ] `NotesIndex`
-  - [ ] `NoteIndexItem`
-  - [ ] `NoteForm`
-- [ ] save Notes to the DB when the form loses focus or is left idle
-  after editing.
+- [ ] implement `StocksIndex` (without `StockPrice`s)
 
-### Phase 4: Start Styling (0.5 days)
+### Phase 5: Outfit Basic Site with Styling (.5 day)
 
-**Objective:** Existing pages (including singup/signin) will look good.
+**Objective:** Basic pages (including signup/signin, StocksIndex) will look good and follow the style guide.
 
-- [ ] create a basic style guide
+- [ ] implement basic style guide
 - [ ] position elements on the page
-- [ ] add basic colors & styles
+- [ ] style StocksIndex
 
-### Phase 5: Notebooks (1 day)
+### Phase 6: StockSearch Flux Architecture and Router (.5 day)
 
-**Objective:** Notes belong to Notebooks, and can be viewed by notebook.
+**Objective:** StockListItems can be created with the user interface.
 
-- [ ] create `Notebook` model
-- build out API, Flux loop, and components for:
-  - [ ] Notebook CRUD
-  - [ ] adding notes requires a notebook
-  - [ ] moving notes to a different notebook
-  - [ ] viewing notes by notebook
-- Use CSS to style new views
+- [ ] implement `StockSearchBar`
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook,
-which has its own `Index` view.
+### Phase 7: Outfit Search with Styling (.5 day)
 
-### Phase 6: Tags (1.5 days)
+**Objective:** Search bar and results will look good and follow the style guide.
 
-**Objective:** Notes can be tagged with multiple tags, and tags are searchable.
+- [ ] style StockSearchBar and SearchBarSuggestions
 
-- [ ] create `Tag` model and join table
-- build out API, Flux loop, and components for:
-  - [ ] fetching tags for notebook
-  - [ ] adding tags to notebook
-  - [ ] creating tags while adding to notebooks
-  - [ ] searching notebooks by tag
-- [ ] Style new elements
+### Phase 8: External APIUtils (.5 day)
 
-### Phase 7: Allow Complex Styling in Notes (0.5 days)
+**Objective:** APIUtils provide methods to interact with external APIs.
 
-**objective:** Enable complex styling of notes.
+- [ ] set up APIUtils to interact with external APIs
+- [ ] test external API interaction in the console
 
-- [ ] Integrate `react-quill` (based on Quill.js).
-- [ ] Use Rails helpers to sanitize HTML before rendering.
-- [ ] Style the new Quill elements.
+### Phase 9: Flesh out Flux Architecture (1 day)
 
-### Phase 8: Styling Cleanup and Seeding (1 day)
+**Objective:** Stocks and StockListItems display external data through the user interface.
 
-**objective:** Make the site feel more cohesive and awesome.
+- implement basics of `StockDetail`
+  - [ ] display current stock price information
+  - [ ] acquire HistoricalStockPrice information
+  - [ ] acquire StockNews information
+  - [ ] create skeletons for StockCharts and StockNews
 
-- [ ] Get feedback on my UI from others
-- [ ] Refactor HTML classes & CSS rules
-- [ ] Add modals, transitions, and other styling flourishes.
+### Phase 10: Implement StockDetail MVP (1.5 days)
+
+**Objective:** StockDetail shows StockCharts and StockNews
+
+- [ ] implement chart plugin (Rickshaw?) with HistoricalStockPrice data
+- [ ] implement StockNewsItems with StockNews data
+
+### Phase 11: Outfit Entire Site with Styling (1.5 days)
+
+**Objective:** All pages will look good and follow the style guide.
+
+- [ ] position elements on the page
+- [ ] style StockChart
+- [ ] style StockNews
 
 ### Bonus Features (TBD)
-- [ ] Search through notes for blocks of text
-- [ ] Pagination / infinite scroll for Notes Index
-- [ ] Set reminders on notes
-- [ ] Changelogs for Notes
+- [ ] Change time window for StockCharts (reveals a different StockChart)
+- [ ] Hover over StockChart displays snapshot of price information
+- [ ] In-app reader for news articles (the other end of the links in StockNews)
 - [ ] Multiple sessions
+- [ ] Sign in with Facebook/Github/Google
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

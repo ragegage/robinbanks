@@ -1,119 +1,56 @@
 # Flux Cycles
 
-Flux loops are organized by data type. Under each data type, there may
-be sub-categories, and each action is listed with the sequence of events
-that result from its invocation, ending with the API or store. Finally,
-store listeners are listed at the end.
+## Stock Cycles
 
-You should be able to use this document trace an **action** starting
-with where it was invoked, through the **API**/**store** involved, and
-finally to the **components** that update as a result. This is important
-because once you start implementing your flux loops, that's precisely
-what you'll need to do.
+### Stocks API Request Actions
 
+* `fetchAllStocks`
+  0. invoked from `StocksIndex` `componentDidMount`/`willReceiveProps`
+  0. `GET /api/stock_list_items` is called with `current_user.id` as params.
+  0. `receiveAllStocks` is set as the callback.
 
-## Note Cycles
+* `createStocksIndexItem`
+  0. invoked from button `onClick` inside `Search` component.
+  0. `POST /api/stock_list_items` is called.
+  0. `receiveSingleStock` is set as the callback.
 
-### Notes API Request Actions
+* `updateStocksIndexItem`
+  0. invoked from `drag` event inside `StocksIndex`
+  0. `PATCH /api/stock_list_items` is called.
+  0. `receiveAllStocks` is set as the callback.
 
-* `fetchAllNotes`
-  0. invoked from `NotesIndex` `didMount`/`willReceiveProps`
-  0. `GET /api/notes` is called.
-  0. `receiveAllNotes` is set as the callback.
+N.B. you can only update a stock insofar as changing its place in your `StocksIndex`; because the ordering will be done in the style of a linked list on the backend, this will require changing three `StocksIndexItem`s: the one being moved, the node that was formerly immediately before it, and the node that is now immediately before it. One `drag` event will cause three `updateStocksIndexItem` calls, and after those updates are made, the updated list of stocks is returned.
 
-* `createNote`
-  0. invoked from new note button `onClick`
-  0. `POST /api/notes` is called.
-  0. `receiveSingleNote` is set as the callback.
+* `destroyStocksIndexItem`
+  0. invoked from delete stock button `onClick`
+  0. `DELETE /api/stock_list_items/:id` is called.
+  0. `PATCH /api/stock_list_items` is also called to connect any nodes that were disrupted by the removal of one.
+  0. `receiveAllStocks` is set as the callback.
 
-* `fetchSingleNote`
-  0. invoked from `NoteDetail` `didMount`/`willReceiveProps`
-  0. `GET /api/notes/:id` is called.
-  0. `receiveSingleNote` is set as the callback.
+N.B. See above re: updating the list of stocks.
 
-* `updateNote`
-  0. invoked from `NoteForm` `onSubmit`
-  0. `POST /api/notes` is called.
-  0. `receiveSingleNote` is set as the callback.
+### Stocks API Response Items
 
-* `destroyNote`
-  0. invoked from delete note button `onClick`
-  0. `DELETE /api/notes/:id` is called.
-  0. `removeNote` is set as the callback.
-
-### Notes API Response Actions
-
-* `receiveAllNotes`
+* `receiveAllStocks`
   0. invoked from an API callback.
-  0. `Note` store updates `_notes` and emits change.
+  0. `Stock` store replaces `_stocks` and emits change.
 
-* `receiveSingleNote`
-  0. invoked from an API callback.
-  0. `Note` store updates `_notes[id]` and emits change.
+N.B. `_stocks` is an array.
 
-* `removeNote`
+* `receiveSingleStock`
   0. invoked from an API callback.
-  0. `Note` store removes `_notes[id]` and emits change.
+  0. `Stock` store pushes new stock onto `_stocks` and emits change.
 
 ### Store Listeners
 
-* `NotesIndex` component listens to `Note` store.
-* `NoteDetail` component listens to `Note` store.
-
-
-## Notebook Cycles
-
-### Notebooks API Request Actions
-
-* `fetchAllNotebooks`
-  0. invoked from `NotebooksIndex` `didMount`/`willReceiveProps`
-  0. `GET /api/notebooks` is called.
-  0. `receiveAllNotebooks` is set as the callback.
-
-* `createNotebook`
-  0. invoked from new notebook button `onClick`
-  0. `POST /api/notebooks` is called.
-  0. `receiveSingleNotebook` is set as the callback.
-
-* `fetchSingleNotebook`
-  0. invoked from `NotebookDetail` `didMount`/`willReceiveProps`
-  0. `GET /api/notebooks/:id` is called.
-  0. `receiveSingleNotebook` is set as the callback.
-
-* `updateNotebook`
-  0. invoked from `NotebookForm` `onSubmit`
-  0. `POST /api/notebooks` is called.
-  0. `receiveSingleNotebook` is set as the callback.
-
-* `destroyNotebook`
-  0. invoked from delete notebook button `onClick`
-  0. `DELETE /api/notebooks/:id` is called.
-  0. `removeNotebook` is set as the callback.
-
-### Notebooks API Response Actions
-
-* `receiveAllNotebooks`
-  0. invoked from an API callback.
-  0. `Notebook` store updates `_notebooks` and emits change.
-
-* `receiveSingleNotebook`
-  0. invoked from an API callback.
-  0. `Notebook` store updates `_notebooks[id]` and emits change.
-
-* `removeNotebook`
-  0. invoked from an API callback.
-  0. `Notebook` store removes `_notebooks[id]` and emits change.
-
-### Store Listeners
-
-* `NotebooksIndex` component listens to `Notebook` store.
-
+* `StocksIndex` component listens to `Stock` store.
+* `StockDetail` component listens to `Stock` store.
 
 ## SearchSuggestion Cycles
 
 * `fetchSearchSuggestions`
-  0. invoked from `NoteSearchBar` `onChange` when there is text
-  0. `GET /api/notes` is called with `text` param.
+  0. invoked from `StockSearchBar` `onChange` when there is text
+  0. `GET /api/stocks` is called with `ticker_symbol` param.
   0. `receiveSearchSuggestions` is set as the callback.
 
 * `receiveSearchSuggestions`
@@ -121,9 +58,67 @@ what you'll need to do.
   0. `SearchSuggestion` store updates `_suggestions` and emits change.
 
 * `removeSearchSuggestions`
-  0. invoked from `NoteSearchBar` `onChange` when empty
+  0. invoked from `StockSearchBar` `onChange` when empty
   0. `SearchSuggestion` store resets `_suggestions` and emits change.
 
 ### Store Listeners
 
 * `SearchBarSuggestions` component listens to `SearchSuggestion` store.
+
+## StockPrice Cycle
+
+### StockPrice API Request Items
+
+* `fetchStockPrice`
+  0. invoked from `StocksIndex` `onChange`
+  0. `GET YAHOO_STOCK_PRICE_API_URL` is called with `ticker_symbol` param.
+  0. `receiveStockPrice` is set as the callback.
+  
+### StockPrices API Response Items
+
+* `receiveStockPrice`
+  0. invoked as an API callback
+  0. `StockPrice` store updates `_stockPrices` and emits change.
+
+### Store Listeners
+
+* `StocksIndex` component listens to `StockPrice` store.
+* `StockDetail` component listens to `StockPrice` store.
+
+## StockDetails Cycle
+
+### HistoricalStockPrices API Request Items
+
+* `fetchHistoricalStockPrices`
+  0. invoked from `StockDetail` `componentDidMount`/`willReceiveProps`
+  0. `GET YAHOO_HISTORICAL_STOCK_PRICE_API_URL` is called with `ticker_symbol` and `date_range` params.
+  0. `receiveHistoricalStockPrices` is set as the callback.
+
+### HistoricalStockPrices API Response Items
+
+* `receiveHistoricalStockPrices`
+  0. invoked as an API callback
+  0. `HistoricalStockPrice` store updates `_historicalStockPrices` and emits change.
+
+### Store Listeners
+
+* `StockDetail` component listens to `HistoricalStockPrice` store.
+
+## StockNews Cycle
+
+### StockNews API Request Items
+
+* `fetchStockNews`
+  0. invoked from `StockDetail` `componentDidMount`/`willReceiveProps`
+  0. `GET YAHOO_STOCK_NEWS_API_URL` is called with `ticker_symbol` param.
+  0. `receiveStockNews` is set as the callback.
+
+### StockNews API Response Items
+
+* `receiveStockNews`
+  0. invoked as an API callback
+  0. `StockNews` store updates `_stockNews` and emits change.
+
+### Store Listeners
+
+* `StockDetail` component listens to `StockNews` store.
