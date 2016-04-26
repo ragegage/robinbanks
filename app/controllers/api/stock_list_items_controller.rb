@@ -4,7 +4,7 @@ class Api::StockListItemsController < ApplicationController
     @stock_list_item.list_id = List.find(user_id: current_user.id).id
 
     if @stock_list_item.save
-      set_list_tail!
+      set_as_list_tail!
       status = 200
       render 'api/lists/show', status: status
     else
@@ -14,8 +14,13 @@ class Api::StockListItemsController < ApplicationController
     end
   end
   def update
+    @stock_list_item = StockListItem.find(params[:id])
+    @new_sibling = StockListItem.find(params[:before_id])
+    move_list_node!
   end
   def destroy
+    @stock_list_item = StockListItem.find(params[:id])
+    remove_stock_list_item!
   end
 
   private
@@ -23,12 +28,14 @@ class Api::StockListItemsController < ApplicationController
     params.require(:stock_list_item).permit(:stock_id)
   end
 
-  def set_list_tail!
+  def set_as_list_tail!
+  # run through linked list until next_stock_list_id = nil
+  # set that next_stock_list_id = @stock_list_item.id
     @list = List.find(@stock_list_item.list_id)
     if @list.list_head
       @stock_list_item_last_link = StockListItem.find(list_head)
       while(@stock_list_item_last_link.next_stock_list_id) do
-        @stock_list_item_last_link = StockListItem.find(next_stock_list_id)
+        @stock_list_item_last_link = StockListItem.find(@stock_list_item_last_link.next_stock_list_id)
       end
       @stock_list_item_last_link.next_stock_list_id = @stock_list_item.id
       @stock_list_item_last_link.save
@@ -36,7 +43,36 @@ class Api::StockListItemsController < ApplicationController
       @list.list_head = @stock_list_item.id
       @list.save
     end
-    # run through linked list until next_stock_list_id = nil
-    # set that next_stock_list_id = @stock_list_item.id
+  end
+
+  def move_list_node!
+    # moves @stock_list_item to @new_sibling.next_stock_list_id
+    # pushes next item one farther back
+    @list = List.find(@stock_list_item.list_id)
+
+    remove_stock_list_item!
+
+    if @new_sibling
+      @stock_list_item.next_stock_list_id = @new_sibling.next_stock_list_id
+      @new_sibling.next_stock_list_id = @stock_list_item.id
+      @stock_list_item.save
+      @new_sibling.save
+    else
+      @new_next = StockListItem.find(@list.list_head)
+      @list.list_head = @stock_list_item.id
+      @stock_list_item.next_stock_list_id = @new_next.id
+      @stock_list_item.save
+      @list.save
+    end
+  end
+
+  def remove_stock_list_item!
+    # cuts @stock_list_item out of linked list
+    @other_item = StockListItem.find(list_head)
+    until(@other_item.next_stock_list_id == @stock_list_item.id) do
+      @other_item = StockListItem.find(@other_item.next_stock_list_id)
+    end
+    @other_item.next_stock_list_id = @stock_list_item.next_stock_list_id
+    @other_item.save
   end
 end
