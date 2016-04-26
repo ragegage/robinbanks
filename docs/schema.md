@@ -20,7 +20,7 @@ column name         | data type | details
 id                  | integer   | not null, primary key
 list_id             | integer   | not null, foreign key (references users), indexed
 stock_id            | string    | not null, foreign key (references stocks), indexed
-next_stock_list_id  | datetime  | not null, foreign key (references stock_list_items)
+next_stock_list_id  | integer   | foreign key (references stock_list_items)
 
 ## users
 column name     | data type | details
