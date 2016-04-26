@@ -12,7 +12,7 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key (references users), indexed
-list_head   | integer   | not null, foreign key (references stock_list_items), indexed
+list_head   | integer   | foreign key (references stock_list_items), indexed
 
 ## stock_list_items
 column name         | data type | details
