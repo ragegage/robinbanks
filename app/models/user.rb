@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 4, allow_nil: true}
   attr_reader :password
 
+  has_one :list
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
   end

@@ -16,11 +16,23 @@ class Api::StockListItemsController < ApplicationController
   def update
     @stock_list_item = StockListItem.find(params[:id])
     @new_sibling = StockListItem.find(params[:before_id])
-    move_list_node!
+    begin
+      move_list_node!
+      status = 200
+      render 'api/lists/show', status: status
+    rescue ActiveRecord::RecordNotFound => e
+      status = 500
+      @errors = ["no record found"]
+      render 'api/lists/show', status: status
+    end
   end
   def destroy
     @stock_list_item = StockListItem.find(params[:id])
+    @list = List.find(@stock_list_item.list_id)
     remove_stock_list_item!
+    @stock_list_item.destroy
+    status = 200
+    render 'api/lists/show', status: status
   end
 
   private
@@ -68,11 +80,17 @@ class Api::StockListItemsController < ApplicationController
 
   def remove_stock_list_item!
     # cuts @stock_list_item out of linked list
-    @other_item = StockListItem.find(list_head)
-    until(@other_item.next_stock_list_id == @stock_list_item.id) do
-      @other_item = StockListItem.find(@other_item.next_stock_list_id)
+    debugger
+    if(@list.list_head == @stock_list_item.id)
+      @list.list_head = @stock_list_item.next_stock_list_id
+      @list.save
+    else
+      @other_item = StockListItem.find(@list.list_head)
+      until(@other_item.next_stock_list_id == @stock_list_item.id) do
+        @other_item = StockListItem.find(@other_item.next_stock_list_id)
+      end
+      @other_item.next_stock_list_id = @stock_list_item.next_stock_list_id
+      @other_item.save
     end
-    @other_item.next_stock_list_id = @stock_list_item.next_stock_list_id
-    @other_item.save
   end
 end

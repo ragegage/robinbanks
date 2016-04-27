@@ -6,6 +6,8 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @list = List.create(user_id: @user.id)
+      @list.populate_self!
       login! @user
       status = 200
       render :show, status: status
@@ -16,8 +18,10 @@ class Api::UsersController < ApplicationController
     end
   end
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.destroy
+      @user.list.depopulate_self!
+      @user.list.destroy
       status = 200
       render :show, status: status
     else
