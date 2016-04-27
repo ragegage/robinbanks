@@ -13,6 +13,6 @@ var routes = (
 );
 
 document.addEventListener("DOMContentLoaded", function(){
-  ReactDOM.render(<Router>{routes}</Router>,
+  ReactDOM.render(<Router history={HashHistory}>{routes}</Router>,
                   document.getElementById("content"));
 });
