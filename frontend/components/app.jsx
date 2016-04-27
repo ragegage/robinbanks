@@ -6,7 +6,11 @@ var App = React.createClass({
 
   render: function(){
     return (
-      <div>main app</div>
+      <div>
+        this is my app
+        <br/>
+        bitches
+      </div>
     );
   }
 });
