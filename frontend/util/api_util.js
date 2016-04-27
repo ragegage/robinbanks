@@ -57,7 +57,7 @@ var ApiUtil = {
   },
 
   // internal data utils
-  getList: function(){
+  fetchList: function(){
     $.ajax({
       method: 'GET',
       url: 'api/list',

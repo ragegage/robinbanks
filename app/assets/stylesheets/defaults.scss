@@ -1,0 +1,49 @@
+html, body, div, h1, h2, h3, p, ul, li, button, input{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "DIN Web", "DIN Alternate", sans-serif;
+  font-weight: inherit;
+  font-size: inherit;
+  // font-sizes: 48 25 20 15
+  // bold: font-weight: 700
+}
+
+input[type=text], input[type=password]{
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #8f8f8f;
+}
+
+button, input[type=submit]{
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #21ce99;
+  border: 1px solid #21ce99;
+  cursor: pointer;
+}
+
+button:hover, input[type=submit]:hover{
+  background-color: #1aa278;
+  border: 1px solid #199972;
+}
+
+.stock-list{
+  font-size: 20px;
+  width: 300px;
+}
+
+.stock-list-item {
+  padding: 20px;
+  border-bottom: 1px solid #8f8f8f;
+}
+
+.bad-news{
+  color: #fff;
+  background-color: #fb5229;
+}
+
+.greyed-out {
+  color: #8f8f8f;
+}

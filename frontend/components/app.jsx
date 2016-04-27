@@ -1,6 +1,6 @@
 var React = require('react');
 var CurrentUserState = require('./../mixins/current_user_state'),
-    LoginForm = require('./login_form');
+    Nav = require('./nav');
 
 var App = React.createClass({
   mixins: [CurrentUserState],
@@ -8,10 +8,7 @@ var App = React.createClass({
   render: function(){
     return (
       <div>
-        this is my app
-        <br/>
-        bitches
-        <LoginForm />
+        <Nav/>
         {this.props.children}
       </div>
     );
