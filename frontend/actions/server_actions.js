@@ -1,6 +1,8 @@
 var Dispatcher = require('./../dispatcher/dispatcher');
+var ListConstants = require('./../constants/list_constants');
 
 var ServerActions = {
+  // user server actions
   receiveCurrentUser: function(currentUser){
     if(isEmpty(currentUser))
       Dispatcher.dispatch({
@@ -26,7 +28,31 @@ var ServerActions = {
       actionType: "LOGOUT",
       user: formerUser
     });
-  }
+  },
+
+  //internal data server actions
+  receiveCurrentList: function(newList){
+    Dispatcher.dispatch({
+      actionType: ListConstants.RECEIVE_NEW_LIST,
+      list: newList
+    });
+  },
+
+  receiveListItem: function(newItem){
+    Dispatcher.dispatch({
+      actionType: ListConstants.RECEIVE_NEW_LIST_ITEM,
+      item: newItem
+    });
+  },
+
+  receiveListErrors: function(errors){
+    Dispatcher.dispatch({
+      actionType: ListConstants.ERROR,
+      errors: errors
+    });
+  },
+
+  //external data server actions
 };
 
 module.exports = ServerActions;
