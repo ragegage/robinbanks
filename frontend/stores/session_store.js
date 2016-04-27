@@ -37,6 +37,7 @@ SessionStore.__onDispatch = function (payload) {
 module.exports = SessionStore;
 
 var login = function(user){
+  console.log("login");
 	_currentUser = user;
   _errors = null;
 };

@@ -20,7 +20,9 @@ var CurrentUserState = {
     this.setState({
       currentUser: SessionStore.currentUser(),
       userErrors: SessionStore.errors()
-    })
+    });
+    if(this.state.userErrors)
+      this.setState({modal: true});
   }
 };
 

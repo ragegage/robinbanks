@@ -17,7 +17,14 @@ var ServerActions = {
   receiveErrors: function(errors){
     Dispatcher.dispatch({
       actionType: "ERROR",
-      errors: errors
+      errors: JSON.parse(errors.responseText)
+    });
+  },
+
+  logout: function(formerUser){
+    Dispatcher.dispatch({
+      actionType: "LOGOUT",
+      user: formerUser
     });
   }
 };
@@ -25,5 +32,5 @@ var ServerActions = {
 module.exports = ServerActions;
 
 var isEmpty = function(obj){
-  return (Object.keys(obj).length === 0 && JSON.stringify(obj) === JSON.stringify({}))
+  return (Object.keys(obj).length === 0 && JSON.stringify(obj) === JSON.stringify({}));
 };

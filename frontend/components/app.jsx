@@ -12,6 +12,7 @@ var App = React.createClass({
         <br/>
         bitches
         <LoginForm />
+        {this.props.children}
       </div>
     );
   }

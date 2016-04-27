@@ -13,6 +13,7 @@ class Api::StockListItemsController < ApplicationController
       render 'api/lists/show', status: status
     end
   end
+
   def update
     @stock_list_item = StockListItem.find(params[:id])
     @new_sibling = StockListItem.find(params[:before_id])
@@ -26,6 +27,7 @@ class Api::StockListItemsController < ApplicationController
       render 'api/lists/show', status: status
     end
   end
+  
   def destroy
     @stock_list_item = StockListItem.find(params[:id])
     @list = List.find(@stock_list_item.list_id)
