@@ -23,12 +23,12 @@ RobinBanks will allow users to do the following:
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
-- [ ] Create an account (MVP)
-- [ ] Log in / Log out, including as a Guest/Demo User (MVP)
+- [x] Create an account (MVP)
+- [x] Log in / Log out, including as a Guest/Demo User (MVP)
 - [ ] View stock price information on watchlist (MVP)
 - [ ] Organize stocks within watchlist (MVP)
-- [ ] Add and delete stocks to/from watchlist (MVP)
-- [ ] Search for stocks by ticker symbol (MVP)
+- [x] Add and delete stocks to/from watchlist (MVP)
+- [x] Search for stocks by ticker symbol (MVP)
 - [ ] View stock information (prices and relevant news) for an individual stock (MVP)
 - [ ] Change time window for an individual stock's price information (non-MVP, but expected)
 - [ ] On hover, display snapshot of price information for an individual stock at a point in time (non-MVP, but expected)
@@ -52,62 +52,62 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 **Objective:** Functioning rails project with Authentication
 
-- [ ] create new project
-- [ ] create `User` model
-- [ ] authentication
-- [ ] user signup/signin pages
-- [ ] blank landing page after signin with `logout` link
-- [ ] page live on robinbanks.herokuapp.com
+- [x] create new project
+- [x] create `User` model
+- [x] authentication
+- [x] user signup/signin pages
+- [x] blank landing page after signin with `logout` link
+- [x] page live on robinbanks.herokuapp.com
 
 ### Phase 2: Stocks, List, and StockListItems Models & API (1 day)
 
 **Objective:** Stocks and StockListItems can be created, read, edited and destroyed through
 the API.
 
-- [ ] create `Stock` model
-- [ ] create `List` model
-- [ ] create `StockListItem` model
-- [ ] seed the database with test data
-- [ ] CRUD API for models (`StocksController`, `StockListItemsController`)
-- [ ] generation of ordered array of stockListItems (from a linked list)
-- [ ] jBuilder views for stocks, stockListItems
-- [ ] test out API interaction with Postman
+- [x] create `Stock` model
+- [x] create `List` model
+- [x] create `StockListItem` model
+- [x] seed the database with test data
+- [x] CRUD API for models (`StocksController`, `StockListItemsController`)
+- [x] generation of ordered array of stockListItems (from a linked list)
+- [x] jBuilder views for stocks, stockListItems
+- [x] test out API interaction with Postman
 
 ### Phase 3: Internal APIUtils (.5 day)
 
 **Objective:** APIUtils provide methods to interact with internal APIs.
 
-- [ ] set up APIUtils to interact with internal APIs
-- [ ] test internal API interaction in the console
+- [x] set up APIUtils to interact with internal APIs
+- [x] test internal API interaction in the console
 
 ### Phase 4: Flux Architecture and Router; implement StockList (.5 day)
 
 **Objective:** StockListItems can be read, edited and destroyed with the
 user interface.
 
-- [ ] setup the flux loop with skeleton files
-- [ ] setup React Router
-- [ ] implement `StocksIndex` (without `StockPrice`s)
+- [x] setup the flux loop with skeleton files
+- [x] setup React Router
+- [x] implement `StocksIndex` (without `StockPrice`s)
 
 ### Phase 5: Outfit Basic Site with Styling (.5 day)
 
 **Objective:** Basic pages (including signup/signin, StocksIndex) will look good and follow the style guide.
 
-- [ ] implement basic style guide
-- [ ] position elements on the page
-- [ ] style StocksIndex
+- [x] implement basic style guide
+- [x] position elements on the page
+- [x] style StocksIndex
 
 ### Phase 6: StockSearch Flux Architecture and Router (.5 day)
 
 **Objective:** StockListItems can be created with the user interface.
 
-- [ ] implement `StockSearchBar`
+- [x] implement `StockSearchBar`
 
 ### Phase 7: Outfit Search with Styling (.5 day)
 
 **Objective:** Search bar and results will look good and follow the style guide.
 
-- [ ] style StockSearchBar and SearchBarSuggestions
+- [x] style StockSearchBar and SearchBarSuggestions
 
 ### Phase 8: External APIUtils (.5 day)
 
