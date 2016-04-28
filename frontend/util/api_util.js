@@ -114,14 +114,17 @@ var ApiUtil = {
   },
 
   getMatchingStocks: function(query){
+    console.log("apiutil "+query);
     $.ajax({
       method: 'GET',
       url: 'api/stocks',
       data: {search: query},
       success: function(matchingStocks){
+        console.log("apiutil success "+matchingStocks);
         ServerActions.receiveSearchResults(matchingStocks);
       },
       error: function(errors){
+        console.log("apiutil error "+errors);
         ServerActions.receiveSearchErrors(errors);
       }
     });

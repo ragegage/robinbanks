@@ -1,5 +1,6 @@
 var Dispatcher = require('./../dispatcher/dispatcher');
-var ListConstants = require('./../constants/list_constants');
+var ListConstants = require('./../constants/list_constants'),
+    SearchConstants = require('./../constants/search_constants');
 
 var ServerActions = {
   // user server actions
@@ -51,6 +52,21 @@ var ServerActions = {
       errors: errors
     });
   },
+
+  receiveSearchResults: function(results){
+    console.log("serveractions "+results);
+    Dispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_SEARCH_RESULTS,
+      results: results
+    });
+  },
+
+  receiveSearchErrors: function(errors){
+    Dispatcher.dispatch({
+      actionType: SearchConstants.ERROR,
+      errors: errors
+    });
+  }
 
   //external data server actions
 };

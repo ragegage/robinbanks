@@ -15,6 +15,11 @@ var ClientActions = {
 
   removeListItem: function(id){
     ApiUtil.removeListItem(id);
+  },
+
+  queryStocks: function(query){
+    console.log("clientactions querystocks "+query);
+    ApiUtil.getMatchingStocks(query);
   }
 };
 

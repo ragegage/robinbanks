@@ -22,17 +22,14 @@ ListStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case ListConstants.RECEIVE_NEW_LIST:
     	replaceList(payload.list);
-      console.log("store emitchange");
       this.__emitChange();
       break;
     case ListConstants.RECEIVE_NEW_LIST_ITEM:
     	addToList(payload.item);
-      console.log("store emitchange");
       this.__emitChange();
       break;
     case ListConstants.ERROR:
       setErrors(payload.errors);
-      console.log("store emitchange");
       this.__emitChange();
       break;
   }

@@ -4,7 +4,8 @@ var React = require('react'),
 var ClientActions = require('./../actions/client_actions'),
     ListStore = require('./../stores/list_store'),
     CurrentUserState = require('./../mixins/current_user_state'),
-    StockListItem = require('./stock_list_item');
+    StockListItem = require('./stock_list_item'),
+    Search = require('./search');
 
 var StocksIndex = React.createClass({
   mixins: [LinkedStateMixin, CurrentUserState],
@@ -16,20 +17,17 @@ var StocksIndex = React.createClass({
   },
 
   componentDidMount: function(){
-    console.log("index didmount");
     ListStore.addListener(this.onChange);
     ClientActions.fetchCurrentList();
   },
 
   componentDidReceiveProps: function(){
-    console.log("index didreceiveprops");
     ListStore.addListener(this.onChange);
     ClientActions.fetchCurrentList();
   },
 
   onChange: function(){
-    console.log("index onchange");
-    this.setState({list: ListStore.list()})
+    this.setState({list: ListStore.list()});
   },
 
   render: function(){
@@ -43,6 +41,7 @@ var StocksIndex = React.createClass({
 
     return (
       <div className="stock-list">
+        <Search />
         'stocksindex'
         <ul>
           {list}
