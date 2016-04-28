@@ -18,14 +18,16 @@ var StocksIndex = React.createClass({
   componentDidMount: function(){
     console.log("stocksindex didmount");
     this.listener = ListStore.addListener(this.onChange);
-    ClientActions.fetchCurrentList();
+    // if(this.state.currentUser && (!this.state.list || this.state.currentUser.id !== this.state.list.user_id))
+    //   ClientActions.fetchCurrentList();
+    // ClientActions.fetchCurrentList();
   },
 
-  componentWillReceiveProps: function(){
-    console.log("stocksindex didreceiveprops");
-    this.listener = ListStore.addListener(this.onChange);
-    ClientActions.fetchCurrentList();
-  },
+  // componentWillReceiveProps: function(){
+  //   console.log("stocksindex didreceiveprops");
+  //   this.listener = ListStore.addListener(this.onChange);
+  //   ClientActions.fetchCurrentList();
+  // },
 
   componentWillUnmount: function(){
     this.listener.remove();

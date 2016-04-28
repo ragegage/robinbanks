@@ -18,13 +18,15 @@ var CurrentUserState = {
   },
 
   updateUser: function(){
+    var currentUser = SessionStore.currentUser();
+    var userErrors = SessionStore.errors();
     this.setState({
-      currentUser: SessionStore.currentUser(),
-      userErrors: SessionStore.errors()
+      currentUser: currentUser,
+      userErrors: userErrors
     });
-    if(this.state.userErrors)
+    if(userErrors)
       this.setState({modal: true});
-    else
+    else if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id))
       ClientActions.fetchCurrentList();
   }
 };

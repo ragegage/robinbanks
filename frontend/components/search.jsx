@@ -41,7 +41,7 @@ var Search = React.createClass({
     results = "";
     if(this.state.results.length > 0){
       results = (
-        <ul onMouseOut={this.onBlur} >
+        <ul>
           {this.state.results.map(function(stock){
             return <SearchItem stock={stock} />;
           })}
@@ -50,7 +50,7 @@ var Search = React.createClass({
     }
 
     return (
-      <div className="search">
+      <div className="search" onMouseLeave={this.onBlur}>
         <input type="text"
           value={this.state.query}
           onChange={this.queryChange}
