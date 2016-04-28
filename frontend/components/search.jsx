@@ -40,10 +40,9 @@ var Search = React.createClass({
   },
 
   queryChange: function(e){
-    console.log("queryChange "+e.target.value);
     e.preventDefault();
     this.setState({query: e.target.value});
-    ClientActions.queryStocks(this.state.query);
+    ClientActions.queryStocks(e.target.value);
   }
 });
 
