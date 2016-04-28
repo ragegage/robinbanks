@@ -8,7 +8,11 @@ var StockShow = React.createClass({
   mixins: [LinkedStateMixin, CurrentUserState],
 
   render: function(){
-    return 'stockshow';
+    return (
+      <div classname="stock-detail">
+        stockshow
+      </div>
+    );
   }
 });
 

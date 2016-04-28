@@ -1,6 +1,7 @@
 var React = require('react');
 var SessionStore = require('./../stores/session_store'),
-    UserActions = require('./../actions/user_actions');
+    UserActions = require('./../actions/user_actions'),
+    ClientActions = require('./../actions/client_actions');
 
 var CurrentUserState = {
   getInitialState: function(){
@@ -11,7 +12,7 @@ var CurrentUserState = {
   },
 
   componentDidMount: function(){
-    SessionStore.addListener(this.updateUser);
+    this.userListener = SessionStore.addListener(this.updateUser);
     if(SessionStore.currentUser() === undefined)
       UserActions.fetchCurrentUser();
   },
@@ -23,6 +24,8 @@ var CurrentUserState = {
     });
     if(this.state.userErrors)
       this.setState({modal: true});
+    else
+      ClientActions.fetchCurrentList();
   }
 };
 

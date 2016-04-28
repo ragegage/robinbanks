@@ -21,7 +21,6 @@ StockStore.searchErrors = function(){
 StockStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case SearchConstants.RECEIVE_SEARCH_RESULTS:
-      console.log("stockstore "+payload.results);
     	replaceResults(payload.results);
       this.__emitChange();
       break;

@@ -1,11 +1,12 @@
 class Api::StockListItemsController < ApplicationController
   def create
     @stock_list_item = StockListItem.new(stock_list_item_params)
-    @stock_list_item.list_id = List.find(user_id: current_user.id).id
+    @stock_list_item.list_id = List.find_by(user_id: current_user.id).id
 
     if @stock_list_item.save
       set_as_list_tail!
       status = 200
+      generate_ordered_array current_user.list
       render 'api/lists/show', status: status
     else
       status = 500
@@ -20,6 +21,7 @@ class Api::StockListItemsController < ApplicationController
     begin
       move_list_node!
       status = 200
+      generate_ordered_array current_user.list
       render 'api/lists/show', status: status
     rescue ActiveRecord::RecordNotFound => e
       status = 500
@@ -27,13 +29,14 @@ class Api::StockListItemsController < ApplicationController
       render 'api/lists/show', status: status
     end
   end
-  
+
   def destroy
     @stock_list_item = StockListItem.find(params[:id])
     @list = List.find(@stock_list_item.list_id)
     remove_stock_list_item!
     @stock_list_item.destroy
     status = 200
+    generate_ordered_array current_user.list
     render 'api/lists/show', status: status
   end
 
@@ -47,7 +50,7 @@ class Api::StockListItemsController < ApplicationController
   # set that next_stock_list_id = @stock_list_item.id
     @list = List.find(@stock_list_item.list_id)
     if @list.list_head
-      @stock_list_item_last_link = StockListItem.find(list_head)
+      @stock_list_item_last_link = StockListItem.find(@list.list_head)
       while(@stock_list_item_last_link.next_stock_list_id) do
         @stock_list_item_last_link = StockListItem.find(@stock_list_item_last_link.next_stock_list_id)
       end

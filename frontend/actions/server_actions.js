@@ -54,7 +54,6 @@ var ServerActions = {
   },
 
   receiveSearchResults: function(results){
-    console.log("serveractions "+results);
     Dispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_SEARCH_RESULTS,
       results: results

@@ -22,6 +22,7 @@ ListStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case ListConstants.RECEIVE_NEW_LIST:
     	replaceList(payload.list);
+      console.log("liststore.emitchange");
       this.__emitChange();
       break;
     case ListConstants.RECEIVE_NEW_LIST_ITEM:
@@ -49,4 +50,5 @@ var addToList = function(newListItem){
 
 var setErrors = function(errors){
   _listErrors = errors;
+  _list = null;
 };

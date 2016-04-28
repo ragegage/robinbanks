@@ -10,8 +10,12 @@ var StockListItem = React.createClass({
   },
 
   componentDidMount: function(){
-    StockPriceStore.addListener(this.onChange);
+    this.listener = StockPriceStore.addListener(this.onChange);
     // ClientActions.fetchCurrentPrice(this.props.item.ticker_symbol);
+  },
+
+  componentWillUnmount: function(){
+    this.listener.remove();
   },
 
   onChange: function(){

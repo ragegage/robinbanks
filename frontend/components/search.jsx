@@ -1,6 +1,7 @@
 var React = require('react');
 var ClientActions = require('./../actions/client_actions'),
-    StockStore = require('./../stores/stock_store');
+    StockStore = require('./../stores/stock_store'),
+    SearchItem = require('./search_item');
 
 var Search = React.createClass({
   getInitialState: function(){
@@ -10,9 +11,26 @@ var Search = React.createClass({
     };
   },
 
-  componentDidMount: function(){
-    StockStore.addListener(this.onChange);
+  // componentDidMount: function(){
+  //   this.listener = StockStore.addListener(this.onChange);
+  //   ClientActions.queryStocks(this.state.query);
+  // },
+  //
+  // componentWillUnmount: function(){
+  //   this.listener.remove();
+  // },
+
+  onFocus: function(){
+    this.listener = StockStore.addListener(this.onChange);
     ClientActions.queryStocks(this.state.query);
+  },
+
+  onBlur: function(){
+    this.listener.remove();
+    this.setState({
+      results: [],
+      query: ""
+    });
   },
 
   onChange: function(){
@@ -21,11 +39,11 @@ var Search = React.createClass({
 
   render: function(){
     results = "";
-    if(this.state.results !== []){
+    if(this.state.results.length > 0){
       results = (
-        <ul>
+        <ul onMouseOut={this.onBlur} >
           {this.state.results.map(function(stock){
-            return <li>{stock.ticker_symbol}</li>;
+            return <SearchItem stock={stock} />;
           })}
         </ul>
       );
@@ -33,7 +51,10 @@ var Search = React.createClass({
 
     return (
       <div className="search">
-        <input type="text" value={this.state.query} onChange={this.queryChange} />
+        <input type="text"
+          value={this.state.query}
+          onChange={this.queryChange}
+          onFocus={this.onFocus}/>
         {results}
       </div>
     );

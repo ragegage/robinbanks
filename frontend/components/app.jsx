@@ -1,5 +1,6 @@
 var React = require('react');
 var CurrentUserState = require('./../mixins/current_user_state'),
+    StocksIndex = require('./stocks_index'),
     Nav = require('./nav');
 
 var App = React.createClass({
@@ -9,7 +10,10 @@ var App = React.createClass({
     return (
       <div>
         <Nav/>
-        {this.props.children}
+        <div className="stock-info">
+          <StocksIndex />
+          {this.props.children}
+        </div>
       </div>
     );
   }

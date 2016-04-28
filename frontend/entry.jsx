@@ -6,13 +6,11 @@ var React = require('react'),
     HashHistory = require('react-router').hashHistory,
     Modal = require('react-modal');
 var App = require('./components/app'),
-    StocksIndex = require('./components/stocks_index'),
     StockShow = require('./components/stock_show');
 
 var routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={StocksIndex} />
-    // <Route path=":id" component={StockShow}/>
+    <Route path=":id" component={StockShow}/>
   </Route>
 );
 

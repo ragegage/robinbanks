@@ -29,14 +29,31 @@ button:hover, input[type=submit]:hover{
   border: 1px solid #199972;
 }
 
-.stock-list{
+label{
+  display:block;
+}
+
+.stock-list, .search{
   font-size: 20px;
   width: 300px;
 }
 
-.stock-list-item {
+.stock-list-item, .search-result-item {
   padding: 20px;
   border-bottom: 1px solid #8f8f8f;
+}
+
+.stock-list-item:hover, .search-result-item:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.search-result-item:hover:after {
+  content: "Add to your list";
+}
+
+.stock-list-item:hover:after {
+  content: "Remove from your list";
 }
 
 .bad-news{

@@ -1,6 +1,4 @@
-var React = require('react'),
-    Modal = require('react-modal'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin');
+var React = require('react');
 var ClientActions = require('./../actions/client_actions'),
     ListStore = require('./../stores/list_store'),
     CurrentUserState = require('./../mixins/current_user_state'),
@@ -8,40 +6,54 @@ var ClientActions = require('./../actions/client_actions'),
     Search = require('./search');
 
 var StocksIndex = React.createClass({
-  mixins: [LinkedStateMixin, CurrentUserState],
+  mixins: [CurrentUserState],
 
   getInitialState: function(){
     return {
-      list: ListStore.list()
+      list: ListStore.list(),
+      errors: ListStore.listErrors()
     };
   },
 
   componentDidMount: function(){
-    ListStore.addListener(this.onChange);
+    console.log("stocksindex didmount");
+    this.listener = ListStore.addListener(this.onChange);
     ClientActions.fetchCurrentList();
   },
 
-  componentDidReceiveProps: function(){
-    ListStore.addListener(this.onChange);
+  componentWillReceiveProps: function(){
+    console.log("stocksindex didreceiveprops");
+    this.listener = ListStore.addListener(this.onChange);
     ClientActions.fetchCurrentList();
+  },
+
+  componentWillUnmount: function(){
+    this.listener.remove();
   },
 
   onChange: function(){
-    this.setState({list: ListStore.list()});
+    console.log("stocksindex onchange fires "+ListStore.list());
+    this.setState({
+      list: ListStore.list(),
+      errors: ListStore.listErrors()
+    });
   },
 
   render: function(){
     var list = "";
 
-    if(this.state.list){
+    // debugger;
+    if(this.state.currentUser && this.state.list)
       list =  this.state.list.map(function(item){
                 return <StockListItem item={item} />
               });
-          }
+
+    if(this.state.errors)
+      list = this.state.errors;
 
     return (
       <div className="stock-list">
-        <Search />
+        {this.state.currentUser ? <Search /> : ""}
         'stocksindex'
         <ul>
           {list}
