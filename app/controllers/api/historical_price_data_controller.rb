@@ -8,7 +8,7 @@ class Api::ListsController < ApplicationController
   def fetch_historical_price_data ticker, start_date, end_date
 
     url = "https://query.yahooapis.com/v1/public/yql"
-            .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%20%22"
+            .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%20%22")
             .concat(ticker)
             .concat("%22%20and%20startDate%20%3D%20%22")
             .concat(start_date)
