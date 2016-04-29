@@ -33,6 +33,7 @@
     "react-dom": "^15.0.1",
     "react-modal": "^1.2.1",
     "react-router": "^2.3.0",
+    "react-sparklines": "^1.5.2",
     "webpack": "^1.13.0"
   },
   "engines": {
