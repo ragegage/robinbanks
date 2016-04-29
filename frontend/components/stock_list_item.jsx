@@ -10,7 +10,7 @@ var StockListItem = React.createClass({
   },
 
   componentDidMount: function(){
-    console.log("item didmount");
+    console.log("listitem didmount");
     this.listener = StockPriceStore.addListener(this.onChange);
     // ClientActions.getCurrentPrice(this.props.item.ticker_symbol);
   },

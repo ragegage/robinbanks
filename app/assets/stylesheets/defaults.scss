@@ -5,12 +5,45 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   font-family: "DIN Web", "DIN Alternate", sans-serif;
   font-weight: inherit;
   font-size: inherit;
+  list-style: none;
+  font-size: 20px;
   // font-sizes: 48 25 20 15
   // bold: font-weight: 700
 }
 
 .stock-info{
   display: flex;
+}
+
+.stock-chart{
+  height: 600px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-chart{
+  height: 300px;
+  width: 100%;
+}
+
+.stock-news{
+  height: 300px;
+  width: 600px;
+}
+
+h1{
+  font-size: 48px;
+}
+
+h2{
+  font-size: 25px;
+}
+
+h4{
+  font-size: 15px;
 }
 
 input[type=text], input[type=password]{
@@ -38,11 +71,10 @@ label{
 }
 
 .stock-list, .search{
-  font-size: 20px;
   width: 300px;
 }
 
-.stock-list-item, .search-result-item {
+.stock-list-item, .search-result-item, .news-result-item, .stock-news h2 {
   padding: 20px;
   border-bottom: 1px solid #8f8f8f;
 }

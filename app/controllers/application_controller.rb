@@ -42,8 +42,6 @@ class ApplicationController < ActionController::Base
 
     @ordered_list = @ordered_list.zip(data["list"]["resources"])
 
-    debugger
-
       # TRY THIS TO GET RID OF EXTRA N + 1 QUERIES
       # node = StockListItem.includes(stock: [:ticker_symbol])
       #                     .find(next_node_id)

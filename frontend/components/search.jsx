@@ -26,7 +26,8 @@ var Search = React.createClass({
   },
 
   onBlur: function(){
-    this.listener.remove();
+    if(this.listener)
+      this.listener.remove();
     this.setState({
       results: [],
       query: ""
