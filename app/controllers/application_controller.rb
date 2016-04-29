@@ -40,7 +40,9 @@ class ApplicationController < ActionController::Base
 
     data = JSON.parse string
 
-    @ordered_list.zip(data["list"]["resources"])
+    @ordered_list = @ordered_list.zip(data["list"]["resources"])
+
+    debugger
 
       # TRY THIS TO GET RID OF EXTRA N + 1 QUERIES
       # node = StockListItem.includes(stock: [:ticker_symbol])

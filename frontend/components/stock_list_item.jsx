@@ -29,7 +29,7 @@ var StockListItem = React.createClass({
         {this.props.item.id}
         {this.props.item.ticker_symbol}
         ~~~~~~
-        <button>${this.state.price}</button>
+        <button>${this.props.item.price}</button>
       </div>
     );
   },
