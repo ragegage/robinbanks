@@ -20,14 +20,17 @@ SessionStore.errors = function(){
 SessionStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case "LOGIN":
+      console.log("login emit change");
     	login(payload.user);
       this.__emitChange();
       break;
     case "LOGOUT":
+      console.log("logout emit change");
     	logout();
       this.__emitChange();
       break;
     case "ERROR":
+      console.log("error emit change");
       setErrors(payload.errors);
       this.__emitChange();
       break;

@@ -6,8 +6,6 @@ var ClientActions = require('./../actions/client_actions'),
     Search = require('./search');
 
 var StocksIndex = React.createClass({
-  mixins: [CurrentUserState],
-
   getInitialState: function(){
     return {
       list: ListStore.list(),
@@ -45,7 +43,7 @@ var StocksIndex = React.createClass({
     var list = "";
 
     // debugger;
-    if(this.state.currentUser && this.state.list)
+    if(this.props.currentUser && this.state.list)
       list =  this.state.list.map(function(item){
                 return <StockListItem item={item} />
               });
@@ -55,7 +53,7 @@ var StocksIndex = React.createClass({
 
     return (
       <div className="stock-list">
-        {this.state.currentUser ? <Search /> : ""}
+        {this.props.currentUser ? <Search /> : ""}
         'stocksindex'
         <ul>
           {list}

@@ -1,6 +1,7 @@
 var Dispatcher = require('./../dispatcher/dispatcher');
 var ListConstants = require('./../constants/list_constants'),
-    SearchConstants = require('./../constants/search_constants');
+    SearchConstants = require('./../constants/search_constants'),
+    PriceConstants = require('./../constants/price_constants');
 
 var ServerActions = {
   // user server actions
@@ -65,9 +66,22 @@ var ServerActions = {
       actionType: SearchConstants.ERROR,
       errors: errors
     });
-  }
+  },
 
   //external data server actions
+  receiveCurrentPrice: function(currentPrice){
+    Dispatcher.dispatch({
+      actionType: PriceConstants.RECEIVE_PRICE_RESULTS,
+      results: currentPrice
+    });
+  },
+
+  receiveCurrentPriceErrors: function(errors){
+    Dispatcher.dispatch({
+      actionType: PriceConstants.ERROR,
+      errors: errors
+    });
+  }
 };
 
 module.exports = ServerActions;

@@ -20,6 +20,10 @@ var ClientActions = {
 
   queryStocks: function(query){
     ApiUtil.getMatchingStocks(query);
+  },
+
+  getCurrentPrice: function(ticker_symbol){
+    ApiUtil.getCurrentPrice(ticker_symbol);
   }
 };
 

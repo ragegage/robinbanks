@@ -5,7 +5,7 @@ var UserActions = require('./../actions/user_actions'),
     CurrentUserState = require('./../mixins/current_user_state');
 
 var LoginForm = React.createClass({
-  mixins: [LinkedStateMixin, CurrentUserState],
+  mixins: [LinkedStateMixin],
 
   getInitialState: function(){
     return {
@@ -49,9 +49,9 @@ var LoginForm = React.createClass({
 
   render: function(){
     var content;
-    if(this.state.currentUser){
+    if(this.props.currentUser){
       content = (
-        <button onClick={this.logout}>Log Out</button>
+        <button onClick={this.logout}>Log Out, {this.props.currentUser.username}</button>
       );
     } else if(this.state.signup) {
       content = (
@@ -61,7 +61,7 @@ var LoginForm = React.createClass({
             isOpen={this.state.modal}
             onRequestClose={this.closeModal}>
 
-            {this.state.userErrors ? this.state.userErrors : ""}
+            {this.props.userErrors ? this.props.userErrors : ""}
 
               <form onSubmit={this.signup}>
                 <label>Username
@@ -84,7 +84,7 @@ var LoginForm = React.createClass({
               isOpen={this.state.modal}
               onRequestClose={this.closeModal}>
 
-              {this.state.userErrors ? this.state.userErrors : ""}
+              {this.props.userErrors ? this.props.userErrors : ""}
 
               <form onSubmit={this.login}>
                 <label>Username

@@ -10,8 +10,9 @@ var StockListItem = React.createClass({
   },
 
   componentDidMount: function(){
+    console.log("item didmount");
     this.listener = StockPriceStore.addListener(this.onChange);
-    // ClientActions.fetchCurrentPrice(this.props.item.ticker_symbol);
+    // ClientActions.getCurrentPrice(this.props.item.ticker_symbol);
   },
 
   componentWillUnmount: function(){
@@ -24,13 +25,18 @@ var StockListItem = React.createClass({
 
   render: function(){
     return (
-      <div className="stock-list-item">
+      <div className="stock-list-item" onClick={this.delete}>
         {this.props.item.id}
         {this.props.item.ticker_symbol}
         ~~~~~~
         <button>${this.state.price}</button>
       </div>
     );
+  },
+
+  delete: function(e){
+    e.preventDefault();
+    ClientActions.removeListItem(this.props.item.id);
   }
 });
 

@@ -4,12 +4,10 @@ var PriceConstants = require('./../constants/price_constants');
 
 var StockPriceStore = new Store(Dispatcher);
 
-var _priceResults, _priceErrors;
+var _currentPrices, _priceResults, _priceErrors;
 
-StockPriceStore.list = function(){
-  if (_priceResults)
-    return [].slice.call(_priceResults);
-  else return null;
+StockPriceStore.price = function(ticker_symbol){
+  return _currentPrices[ticker_symbol];
 };
 
 StockPriceStore.searchErrors = function(){
@@ -20,8 +18,9 @@ StockPriceStore.searchErrors = function(){
 
 StockPriceStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
-    case PriceConstants.RECEIVE_PRICE_RESULTS:
-    	replaceResults(payload.results);
+    case PriceConstants.RECEIVE_CURRENT_PRICE:
+      console.log("stockpricestore receivecurrentprice");
+    	replaceCurrentPrice(payload.results);
       this.__emitChange();
       break;
     case PriceConstants.ERROR:
@@ -33,8 +32,8 @@ StockPriceStore.__onDispatch = function (payload) {
 
 module.exports = StockPriceStore;
 
-var replaceResults = function(newResults){
-  _priceResults = newResults;
+var replaceCurrentPrice = function(newPrice){
+  _currentPrices[newPrice.symbol] = newPrice.price;
   _priceErrors = null;
 };
 

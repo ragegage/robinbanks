@@ -9,9 +9,9 @@ var App = React.createClass({
   render: function(){
     return (
       <div>
-        <Nav/>
+        <Nav userErrors={this.state.userErrors} currentUser={this.state.currentUser} />
         <div className="stock-info">
-          <StocksIndex />
+          <StocksIndex userErrors={this.state.userErrors} currentUser={this.state.currentUser} />
           {this.props.children}
         </div>
       </div>

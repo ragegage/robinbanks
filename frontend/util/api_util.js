@@ -133,22 +133,24 @@ var ApiUtil = {
 
   // external data utils
   getCurrentPrice: function(ticker){
-    $.ajax({
-      method: 'GET',
-      url: 'https://finance.yahoo.com/webservice/v1/symbols/'+ticker+'/quote?format=json',
-      data: {},
-      success: function(priceInfo){
-        if(priceInfo.list.meta.count > 0){ // success
-          var priceData = priceInfo.list.resources[0].resource.fields;
-          ServerActions.receiveCurrentPrice(priceData);
-        } else { //silent failure
-          ServerActions.receiveCurrentPriceErrors(["no results found for "+ticker]);
-        }
-      },
-      error: function(errors){ // loud failure
-        ServerActions.receiveCurrentPriceErrors(errors);
-      }
-    });
+
+
+    // $.ajax({
+    //   method: 'GET',
+    //   url: 'https://finance.yahoo.com/webservice/v1/symbols/'+ticker+'/quote?format=json',
+    //   data: {},
+    //   success: function(priceInfo){
+    //     if(priceInfo.list.meta.count > 0){ // success
+    //       var priceData = priceInfo.list.resources[0].resource.fields;
+    //       ServerActions.receiveCurrentPrice(priceData);
+    //     } else { //silent failure
+    //       ServerActions.receiveCurrentPriceErrors(["no results found for "+ticker]);
+    //     }
+    //   },
+    //   error: function(errors){ // loud failure
+    //     ServerActions.receiveCurrentPriceErrors(errors);
+    //   }
+    // });
   },
 
   getHistoricalPrices: function(ticker, dateRange){

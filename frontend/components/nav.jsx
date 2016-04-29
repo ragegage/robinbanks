@@ -5,7 +5,7 @@ var Nav = React.createClass({
   render: function(){
     return (
       <nav className="nav">
-        <LoginForm />
+        <LoginForm userErrors={this.props.userErrors} currentUser={this.props.currentUser} />
       </nav>
     );
   }

@@ -12,12 +12,14 @@ var CurrentUserState = {
   },
 
   componentDidMount: function(){
+    console.log("current_user_state didmount");
     this.userListener = SessionStore.addListener(this.updateUser);
     if(SessionStore.currentUser() === undefined)
       UserActions.fetchCurrentUser();
   },
 
   updateUser: function(){
+    console.log("current_user_state updateuser called");
     var currentUser = SessionStore.currentUser();
     var userErrors = SessionStore.errors();
     this.setState({

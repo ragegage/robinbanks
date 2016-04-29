@@ -85,7 +85,6 @@ class Api::StockListItemsController < ApplicationController
 
   def remove_stock_list_item!
     # cuts @stock_list_item out of linked list
-    debugger
     if(@list.list_head == @stock_list_item.id)
       @list.list_head = @stock_list_item.next_stock_list_id
       @list.save

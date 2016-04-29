@@ -1,16 +1,15 @@
-var React = require('react'),
-    Modal = require('react-modal'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin');
-var UserActions = require('../actions/user_actions'),
-    CurrentUserState = require('../mixins/current_user_state');
+var React = require('react');
+var ClientActions = require('./../actions/client_actions'),
+    StockStore = require('./../stores/stock_store');
 
 var StockShow = React.createClass({
-  mixins: [LinkedStateMixin, CurrentUserState],
+  componentDidMount: function(){
+    this.stock = StockStore.find(this.props.params.id);
+  },
 
   render: function(){
     return (
       <div classname="stock-detail">
-        stockshow
       </div>
     );
   }
