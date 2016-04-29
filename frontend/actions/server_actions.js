@@ -41,6 +41,7 @@ var ServerActions = {
   },
 
   receiveListItem: function(newItem){
+    //deprecated
     Dispatcher.dispatch({
       actionType: ListConstants.RECEIVE_NEW_LIST_ITEM,
       item: newItem

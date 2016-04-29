@@ -24,6 +24,7 @@ var StockListItem = React.createClass({
   },
 
   render: function(){
+    debugger;
     return (
       <div className="stock-list-item" onClick={this.delete}>
         {this.props.item.id}

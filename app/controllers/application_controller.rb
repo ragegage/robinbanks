@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     @ordered_list = []
 
 
-
+    # generates ordered array
     while(next_node_id) do
       node = StockListItem.includes(:stock).find(next_node_id)
       @ordered_list << node
@@ -30,22 +30,71 @@ class ApplicationController < ActionController::Base
     end
 
 
-
-    url = "https://finance.yahoo.com/webservice/v1/symbols/"
+    # fetches current price for each element in array, zips the information
+    current_price_url = "https://finance.yahoo.com/webservice/v1/symbols/"
             .concat(@ordered_list.map(){|i| i.stock.ticker_symbol}.join(","))
             .concat("/quote?format=json")
 
+    current_price_string = HTTP.get(current_price_url).to_s
 
-    string = HTTP.get(url).to_s
+    current_price_data = JSON.parse current_price_string
 
-    data = JSON.parse string
+    @ordered_list = @ordered_list.zip(current_price_data["list"]["resources"])
 
-    @ordered_list = @ordered_list.zip(data["list"]["resources"])
+
+    # fetches monthly data for each element in array
+    month_data_url = "https://query.yahooapis.com/v1/public/yql"
+            .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20%20")
+            .concat("('#{@ordered_list.map(){|i| i[0].stock.ticker_symbol}.join("','")}')")
+            .concat("%20and%20startDate%20%3D%20%22")
+            .concat(Date.today.prev_month.to_s)
+            .concat("%22%20and%20%20endDate%20%3D%20%22")
+            .concat(Date.today.to_s)
+            .concat("%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
+
+    month_data_string = HTTP.get(month_data_url).to_s
+
+    month_data = JSON.parse month_data_string
+
+    ordered_historical_data = []
+
+    if month_data["query"]["count"].to_i > 0
+      month_data = month_data["query"]["results"]["quote"]
+
+      ordered_historical_data = get_array_of_historical_data month_data
+    end
+
+    @ordered_list = @ordered_list.zip(ordered_historical_data)
 
       # TRY THIS TO GET RID OF EXTRA N + 1 QUERIES
       # node = StockListItem.includes(stock: [:ticker_symbol])
       #                     .find(next_node_id)
       #
       # also maybe try chaining the queries?
+  end
+
+  def get_array_of_historical_data historical_data
+
+    # loop through list, put item["Symbol"], item["Date"], and item["Close"] into a new object
+      # those objects get put into an array for each symbol
+        # those arrays get put into another array (month_data_arr)
+
+    current_symbol = nil
+    data_arr = []
+    count = -1
+    historical_data.each do |datum|
+      desired_datum_data = {
+                             ticker: datum["Symbol"],
+                             date: datum["Date"],
+                             close: datum["Close"].to_f.round(2)
+                           }
+      if datum["Symbol"] == current_symbol
+        data_arr[count] << desired_datum_data
+      else
+        data_arr << [desired_datum_data]
+        current_symbol = datum["Symbol"]
+      end
+    end
+    data_arr
   end
 end
