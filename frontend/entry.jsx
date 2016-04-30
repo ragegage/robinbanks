@@ -10,7 +10,7 @@ var App = require('./components/app'),
 
 var routes = (
   <Route path="/" component={App}>
-    <Route path=":id" component={StockShow}/>
+    <Route path=":tickerSymbol" component={StockShow}/>
   </Route>
 );
 

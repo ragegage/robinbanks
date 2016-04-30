@@ -1,7 +1,7 @@
 var Dispatcher = require('./../dispatcher/dispatcher');
 var ListConstants = require('./../constants/list_constants'),
     SearchConstants = require('./../constants/search_constants'),
-    PriceConstants = require('./../constants/price_constants');
+    HistoricalPriceConstants = require('./../constants/historical_price_constants');
 
 var ServerActions = {
   // user server actions
@@ -70,16 +70,16 @@ var ServerActions = {
   },
 
   //external data server actions
-  receiveCurrentPrice: function(currentPrice){
+  receiveHistoricalPrices: function(priceData){
     Dispatcher.dispatch({
-      actionType: PriceConstants.RECEIVE_PRICE_RESULTS,
-      results: currentPrice
+      actionType: HistoricalPriceConstants.RECEIVE_HISTORICAL_PRICE_RESULTS,
+      data: priceData
     });
   },
 
-  receiveCurrentPriceErrors: function(errors){
+  receiveHistoricalPriceErrors: function(errors){
     Dispatcher.dispatch({
-      actionType: PriceConstants.ERROR,
+      actionType: HistoricalPriceConstants.ERROR,
       errors: errors
     });
   }

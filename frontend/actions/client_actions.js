@@ -6,8 +6,8 @@ var ClientActions = {
     ApiUtil.fetchList();
   },
 
-  createListItem: function(stock_id){
-    ApiUtil.createListItem(stock_id);
+  createListItem: function(stockId){
+    ApiUtil.createListItem(stockId);
   },
 
   updateListItem: function(id, newSiblingId){
@@ -22,8 +22,12 @@ var ClientActions = {
     ApiUtil.getMatchingStocks(query);
   },
 
-  getCurrentPrice: function(ticker_symbol){
-    ApiUtil.getCurrentPrice(ticker_symbol);
+  getCurrentPrice: function(tickerSymbol){
+    ApiUtil.getCurrentPrice(tickerSymbol);
+  },
+
+  fetchHistoricalPrices: function(ticker, range){
+    ApiUtil.fetchHistoricalPrices(ticker, range);
   }
 };
 

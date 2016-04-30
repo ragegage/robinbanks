@@ -1,33 +1,10 @@
 var React = require('react');
 var Sparklines = require('react-sparklines').Sparklines;
 var SparklinesLine = require('react-sparklines').SparklinesLine;
-var ClientActions = require('./../actions/client_actions'),
-    StockPriceStore = require('./../stores/stock_price_store');
+var ClientActions = require('./../actions/client_actions');
 
 var StockListItem = React.createClass({
-  getInitialState: function(){
-    return {
-      price: 10.53
-    };
-  },
-
-  componentDidMount: function(){
-    console.log("listitem didmount");
-    this.listener = StockPriceStore.addListener(this.onChange);
-    // ClientActions.getCurrentPrice(this.props.item.ticker_symbol);
-  },
-
-  componentWillUnmount: function(){
-    this.listener.remove();
-  },
-
-  onChange: function(){
-    this.setState({price: StockPriceStore.price(this.props.item.ticker_symbol)})
-  },
-
   render: function(){
-    debugger;
-
     if(this.props.item){
       var historicalPriceData = this.props.item.historical_data.map(function(datum){
                                   return datum.close

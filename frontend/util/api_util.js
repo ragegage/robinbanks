@@ -74,11 +74,11 @@ var ApiUtil = {
     });
   },
 
-  createListItem: function(stock_id){
+  createListItem: function(stockId){
     $.ajax({
       method: 'POST',
       url: 'api/stock_list_items',
-      data: {stock_list_item: {stock_id: stock_id}},
+      data: {stock_list_item: {stock_id: stockId}},
       success: function(currentList){
         ServerActions.receiveCurrentList(currentList);
       },
@@ -132,16 +132,18 @@ var ApiUtil = {
 
 
   // external data utils
-  getHistoricalPrices: function(ticker, dateRange){
+  fetchHistoricalPrices: function(ticker, range){
     // dateRange = {start: "2016-03-24", end: "2016-04-24"}
     $.ajax({
       method: 'GET',
       url: 'api/historical_price_data',
-      data: {ticker: ticker, start: dateRange.start, end:dateRange.end},
+      data: {ticker: ticker, range: range},
       success: function(priceData){
+        console.log("apiutil historicalprices success");
         ServerActions.receiveHistoricalPrices(priceData);
       },
       error: function(errors){
+        console.log("apiutil historicalprices success");
         ServerActions.receiveHistoricalPriceErrors(errors);
       }
     });
