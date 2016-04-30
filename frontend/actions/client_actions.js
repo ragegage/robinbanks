@@ -28,6 +28,10 @@ var ClientActions = {
 
   fetchHistoricalPrices: function(ticker, range){
     ApiUtil.fetchHistoricalPrices(ticker, range);
+  },
+
+  fetchRelatedNews: function(ticker){
+    ApiUtil.fetchRelatedNews(ticker);
   }
 };
 

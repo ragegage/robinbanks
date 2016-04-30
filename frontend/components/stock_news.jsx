@@ -3,10 +3,31 @@ var ClientActions = require('./../actions/client_actions'),
     NewsStore = require('./../stores/news_store');
 
 var StockNews = React.createClass({
+  getInitialState: function(){
+    return {
+      news: []
+    };
+  },
+
+  componentDidMount: function(){
+    NewsStore.addListener(this.onChange);
+    ClientActions.fetchRelatedNews(this.props.ticker);
+  },
+
+  componentDidReceiveProps: function(){
+    NewsStore.addListener(this.onChange);
+    ClientActions.fetchRelatedNews(this.props.ticker);
+  },
+
+  onChange: function(){
+    this.setState({news: NewsStore.news()});
+  },
+
   render: function(){
+    debugger;
     var newsItems = (
-      [1,2,3].map(function(item){
-        return <li className="news-result-item">item</li>;
+      this.state.news.map(function(item){
+        return <li className="news-result-item">{item.title}</li>;
       })
     );
 

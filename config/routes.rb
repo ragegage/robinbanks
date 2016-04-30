@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     resources :stock_list_items, only: [:create, :update, :destroy]
     resource :list, only: [:show]
     resource :historical_price_data, only: [:show]
+    resource :news, only: [:show]
   end
 end

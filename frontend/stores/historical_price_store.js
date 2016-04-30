@@ -16,10 +16,12 @@ HistoricalPriceStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case HistoricalPriceConstants.RECEIVE_HISTORICAL_PRICE_RESULTS:
       _historicalPrices = payload.data;
+      _historicalPriceErrors = null;
       this.__emitChange();
       break;
     case HistoricalPriceConstants.ERROR:
       _historicalPriceErrors = payload.errors;
+      _historicalPrices= null;
       this.__emitChange();
       break;
   }

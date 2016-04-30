@@ -34,6 +34,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem "http"
 
+gem "feedjira"
+
 
 
 group :production do

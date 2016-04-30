@@ -149,8 +149,22 @@ var ApiUtil = {
     });
   },
 
-  getRelatedNews: function(ticker){
+  fetchRelatedNews: function(ticker){
     // not implemented yet
+
+    $.ajax({
+      method: 'GET',
+      url: 'api/news',
+      data: {ticker: ticker},
+      success: function(news){
+        console.log("apiutil news success");
+        ServerActions.receiveNews(news);
+      },
+      error: function(errors){
+        console.log("apiutil news success");
+        ServerActions.receiveNewsErrors(errors);
+      }
+    });
 
     // $.ajax({
     //   method: 'GET',

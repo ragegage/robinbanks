@@ -1,7 +1,8 @@
 var Dispatcher = require('./../dispatcher/dispatcher');
 var ListConstants = require('./../constants/list_constants'),
     SearchConstants = require('./../constants/search_constants'),
-    HistoricalPriceConstants = require('./../constants/historical_price_constants');
+    HistoricalPriceConstants = require('./../constants/historical_price_constants'),
+    NewsConstants = require('./../constants/news_constants.js');
 
 var ServerActions = {
   // user server actions
@@ -80,6 +81,20 @@ var ServerActions = {
   receiveHistoricalPriceErrors: function(errors){
     Dispatcher.dispatch({
       actionType: HistoricalPriceConstants.ERROR,
+      errors: errors
+    });
+  },
+  
+  receiveNews: function(news){
+    Dispatcher.dispatch({
+      actionType: NewsConstants.RECEIVE_NEWS,
+      news: news
+    });
+  },
+
+  receiveNewsErrors: function(errors){
+    Dispatcher.dispatch({
+      actionType: NewsConstants.ERROR,
       errors: errors
     });
   }
