@@ -25,7 +25,7 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 - [x] Create an account (MVP)
 - [x] Log in / Log out, including as a Guest/Demo User (MVP)
-- [ ] View stock price information on watchlist (MVP)
+- [x] View stock price information on watchlist (MVP)
 - [ ] Organize stocks within watchlist (MVP)
 - [x] Add and delete stocks to/from watchlist (MVP)
 - [x] Search for stocks by ticker symbol (MVP)
@@ -121,10 +121,10 @@ user interface.
 **Objective:** Stocks and StockListItems display external data through the user interface.
 
 - implement basics of `StockDetail`
-  - [ ] display current stock price information
-  - [ ] acquire HistoricalStockPrice information
+  - [x] display current stock price information
+  - [x] acquire HistoricalStockPrice information
   - [ ] acquire StockNews information
-  - [ ] create skeletons for StockCharts and StockNews
+  - [x] create skeletons for StockCharts and StockNews
 
 ### Phase 10: Implement StockDetail MVP (1.5 days)
 
@@ -137,9 +137,10 @@ user interface.
 
 **Objective:** All pages will look good and follow the style guide.
 
-- [ ] position elements on the page
-- [ ] style StockChart
-- [ ] style StockNews
+- [x] position elements on the page
+- [x] style StockChart
+- [x] style StockNews
+- [ ] do a final style-check against the wireframes
 
 ### Bonus Features (TBD)
 - [ ] Change time window for StockCharts (reveals a different StockChart)
