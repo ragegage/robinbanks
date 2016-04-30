@@ -51,4 +51,4 @@ NB: potentially https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20
 
 - `GET YAHOO_STOCK_NEWS_API_URL`
 
-NB: potentially http://finance.yahoo.com/rss/headline?s=STOCK_TICKER or http://finance.yahoo.com/rss/industry?s=STOCK_TICKER
+NB: potentially http://finance.yahoo.com/rss/headline?s=STOCK_TICKER or http://finance.yahoo.com/rss/industry?s=STOCK_TICKER (appears to redirect to http://feeds.finance.yahoo.com/rss/2.0/headline?s=GOOG&region=US&lang=en-US)
