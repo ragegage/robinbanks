@@ -37,22 +37,28 @@ var StockChart = React.createClass({
     var chartData = {
       labels: [],
       datasets: [{
-        label: "My First dataset",
         data: prices,
-        fill: false,
-        color: "rgba(75,192,192,1)",
-        backgroundColor: "#21ce99",
-        borderDash: [5, 5],
+        fillColor: "#fff",
+        strokeColor: "#21ce99",
+        pointColor: "#21ce99",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        
+        lineTension: 0,
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
       }]
     };
     var chartOptions = {
       responsive: true,
-      title:{
-        display:false,
-        text:'Chart.js Line Chart'
-      },
       tooltips: {
-        mode: 'label',
+        mode: 'single',
         callbacks: {
           // beforeTitle: function() {
           //     return '...beforeTitle';
@@ -79,20 +85,6 @@ var StockChart = React.createClass({
       },
       hover: {
           mode: 'dataset'
-      },
-      scales: {
-        xAxes: [],
-        yAxes: [{
-          display: false,
-          scaleLabel: {
-              show: false,
-              labelString: 'Value'
-          },
-          ticks: {
-              suggestedMin: -10,
-              suggestedMax: 250,
-          }
-        }]
       }
     };
 
