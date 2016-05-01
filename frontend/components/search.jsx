@@ -39,7 +39,7 @@ var Search = React.createClass({
   },
 
   render: function(){
-    results = "";
+    var results = "";
     if(this.state.results.length > 0){
       results = (
         <ul>
