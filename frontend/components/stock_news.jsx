@@ -24,7 +24,6 @@ var StockNews = React.createClass({
   },
 
   render: function(){
-    debugger;
     var newsItems = (
       this.state.news.map(function(item){
         return <li className="news-result-item">{item.title}</li>;

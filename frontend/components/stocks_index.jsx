@@ -42,7 +42,6 @@ var StocksIndex = React.createClass({
   render: function(){
     var list = "";
 
-    // debugger;
     if(this.props.currentUser && this.state.list)
       list =  this.state.list.map(function(item){
                 return <StockListItem item={item} />
