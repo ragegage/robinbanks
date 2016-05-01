@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   def generate_ordered_array list
     next_node_id = list.list_head
     @ordered_list = []
+    @errors = []
 
 
     # generates ordered array
@@ -37,9 +38,13 @@ class ApplicationController < ActionController::Base
 
     current_price_string = HTTP.get(current_price_url).to_s
 
-    current_price_data = JSON.parse current_price_string
+    begin
+      current_price_data = JSON.parse current_price_string
+      @ordered_list = @ordered_list.zip(current_price_data["list"]["resources"])
+    rescue JSON::ParserError => e
+      @errors << e
+    end
 
-    @ordered_list = @ordered_list.zip(current_price_data["list"]["resources"])
 
 
     # fetches monthly data for each element in array
@@ -54,18 +59,21 @@ class ApplicationController < ActionController::Base
 
     month_data_string = HTTP.get(month_data_url).to_s
 
-    month_data = JSON.parse month_data_string
+    begin
+      month_data = JSON.parse month_data_string
 
-    ordered_historical_data = []
+      ordered_historical_data = []
 
-    if month_data["query"]["count"].to_i > 0
-      month_data = month_data["query"]["results"]["quote"]
+      if month_data["query"]["count"].to_i > 0
+        month_data = month_data["query"]["results"]["quote"]
 
-      ordered_historical_data = get_array_of_historical_data month_data
+        ordered_historical_data = get_array_of_historical_data month_data
+      end
+
+      @ordered_list = @ordered_list.zip(ordered_historical_data)
+    rescue JSON::ParserError => e2
+      @errors << e2
     end
-
-    @ordered_list = @ordered_list.zip(ordered_historical_data)
-
       # TRY THIS TO GET RID OF EXTRA N + 1 QUERIES
       # node = StockListItem.includes(stock: [:ticker_symbol])
       #                     .find(next_node_id)
