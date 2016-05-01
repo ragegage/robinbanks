@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
     end
 
 
+    debugger
     # fetches current price for each element in array, zips the information
     current_price_url = "https://finance.yahoo.com/webservice/v1/symbols/"
             .concat(@ordered_list.map(){|i| i.stock.ticker_symbol}.join(","))
@@ -42,6 +43,7 @@ class ApplicationController < ActionController::Base
     @ordered_list = @ordered_list.zip(current_price_data["list"]["resources"])
 
 
+    debugger
     # fetches monthly data for each element in array
     month_data_url = "https://query.yahooapis.com/v1/public/yql"
             .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20%20")
