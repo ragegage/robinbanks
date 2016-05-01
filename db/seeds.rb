@@ -61,5 +61,5 @@ stocks = [
 ]
 
 stocks.each do |stock|
-  Stock.create(stock)
+  Stock.create(ticker_symbol: stock)
 end
