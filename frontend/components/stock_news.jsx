@@ -1,6 +1,7 @@
 var React = require('react');
 var ClientActions = require('./../actions/client_actions'),
-    NewsStore = require('./../stores/news_store');
+    NewsStore = require('./../stores/news_store'),
+    StockNewsItem = require('./stock_news_item');
 
 var StockNews = React.createClass({
   getInitialState: function(){
@@ -27,7 +28,7 @@ var StockNews = React.createClass({
   render: function(){
     var newsItems = (
       this.state.news.map(function(item){
-        return <li className="news-result-item">{item.title}</li>;
+        return <StockNewsItem item={item} />;
       })
     );
 
