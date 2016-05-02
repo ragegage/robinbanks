@@ -19,7 +19,6 @@ class Api::NewsController < ApplicationController
 
     if @feed.entries.count.to_i > 0
       @news = @feed.entries[0..5]
-      debugger
     else
       @news = nil
       @errors = ["news could not be loaded"]
