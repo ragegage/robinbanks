@@ -15,13 +15,13 @@ var StockListItem = React.createClass({
 
 
     return (
-      <div className="stock-list-item" onClick={this.delete}>
-        {this.props.item.id}
+      <div className="stock-list-item" onClick={this.select}>
         {this.props.item.ticker_symbol}
         <Sparklines data={historicalPriceData} limit={30} width={90} height={20} margin={5}>
           <SparklinesLine style={{stroke: "21ce99", fill: "none"}} />
         </Sparklines>
         <button>${this.props.item.price}</button>
+        <button className="list-item-delete" onClick={this.delete}>Delete</button>
       </div>
     );
   },
@@ -29,6 +29,11 @@ var StockListItem = React.createClass({
   delete: function(e){
     e.preventDefault();
     ClientActions.removeListItem(this.props.item.id);
+  },
+
+  select: function(e){
+    e.preventDefault();
+    // ClientActions.removeListItem(this.props.item.id);
   }
 });
 

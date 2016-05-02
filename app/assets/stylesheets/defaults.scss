@@ -85,18 +85,41 @@ label{
   border-bottom: 1px solid #8f8f8f;
 }
 
-.stock-list-item:hover, .search-result-item:hover {
+.search-result-item:hover {
   background-color: #ccc;
   cursor: pointer;
+}
+
+.stock-list-item{
+  .list-item-delete{
+    display:none
+  }
+}
+.stock-list-item:hover {
+  .list-item-delete{
+    display:inline;
+    color: #8f8f8f;
+    background-color: #fff;
+    border: 1px solid #8f8f8f;
+  }
+  svg {
+    display: none;
+  }
+}
+
+.stock-list-item.selected {
+  background-color: #21ce99;
+  color: #fff;
+  button {
+    border: 1px solid #fff;
+    color: #000;
+  }
 }
 
 .search-result-item:hover:after {
   content: "Add to your list";
 }
 
-.stock-list-item:hover:after {
-  content: "Remove from your list";
-}
 
 .bad-news{
   color: #fff;
