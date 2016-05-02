@@ -9,7 +9,7 @@ var StocksIndex = React.createClass({
   getInitialState: function(){
     return {
       list: ListStore.list(),
-      errors: ListStore.listErrors()
+      listErrors: ListStore.listErrors()
     };
   },
 
@@ -35,7 +35,7 @@ var StocksIndex = React.createClass({
     console.log("stocksindex onchange fires "+ListStore.list());
     this.setState({
       list: ListStore.list(),
-      errors: ListStore.listErrors()
+      listErrors: ListStore.listErrors()
     });
   },
 
@@ -47,8 +47,8 @@ var StocksIndex = React.createClass({
                 return <StockListItem item={item} />
               });
 
-    if(this.state.errors)
-      list = this.state.errors;
+    // if(this.state.listErrors)
+    //   list = this.state.listErrors;
 
     return (
       <div className="stock-list">

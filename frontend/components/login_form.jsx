@@ -18,6 +18,7 @@ var LoginForm = React.createClass({
   },
 
   componentDidMount: function(){
+
   },
 
   logout: function(e){
@@ -32,7 +33,7 @@ var LoginForm = React.createClass({
       username: this.state.username,
       password: this.state.password
     });
-    this.setState({modal: false});
+    // this.setState({modal: false});
   },
 
   guestLogin: function(e){
@@ -41,7 +42,7 @@ var LoginForm = React.createClass({
       username: "guest",
       password: "guest"
     });
-    this.setState({modal: false});
+    // this.setState({modal: false});
   },
 
   signup: function(e){
@@ -50,7 +51,7 @@ var LoginForm = React.createClass({
       username: this.state.username,
       password: this.state.password
     });
-    this.setState({modal: false});
+    // this.setState({modal: false});
   },
 
   toggleSignup: function(e){
@@ -89,6 +90,20 @@ var LoginForm = React.createClass({
 
 
     var content;
+    var usernameInput = (
+      <input
+        type="text"
+        valueLink={this.linkState('username')}
+        placeholder="Username"
+        className={this.props.userErrors ? "error" : ""}/>
+    );
+    var passwordInput = (
+      <input
+        type="password"
+        valueLink={this.linkState('password')}
+        placeholder="Password"
+        className={this.props.userErrors ? "error" : ""}/>
+  );
     if(this.props.currentUser){
       content = (
         <button onClick={this.logout}>Log Out, {this.props.currentUser.username}</button>
@@ -102,18 +117,12 @@ var LoginForm = React.createClass({
             onRequestClose={this.closeModal}
             style={modalStyle}>
 
-            {this.props.userErrors ? this.props.userErrors : ""}
               <div className="signup">
                 <h1>Sign Up</h1>
                 <form onSubmit={this.signup}>
-                  <input
-                    type="text"
-                    valueLink={this.linkState('username')}
-                    placeholder="Username"/>
-                  <input
-                    type="password"
-                    valueLink={this.linkState('password')}
-                    placeholder="Password"/>
+                  {usernameInput}
+                  {passwordInput}
+                  {this.props.userErrors ? <h4 className="error">{this.props.userErrors}</h4> : ""}
                   <input type="submit" value="Sign Up" />
                 </form>
                 <h4>Actually, I have an account.&nbsp;
@@ -133,18 +142,12 @@ var LoginForm = React.createClass({
               onRequestClose={this.closeModal}
               style={modalStyle}>
 
-              {this.props.userErrors ? this.props.userErrors : ""}
               <div className="login">
                 <h1>Log In</h1>
                 <form onSubmit={this.login}>
-                  <input
-                    type="text"
-                    valueLink={this.linkState('username')}
-                    placeholder="Username"/>
-                  <input
-                    type="password"
-                    valueLink={this.linkState('password')}
-                    placeholder="Password"/>
+                  {usernameInput}
+                  {passwordInput}
+                  {this.props.userErrors ? <h4 className="error">{this.props.userErrors}</h4> : ""}
                   <input type="submit" value="Let's Go!" />
                 </form>
                 <h4>Actually, I don't have an account.&nbsp;

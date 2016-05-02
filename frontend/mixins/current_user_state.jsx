@@ -26,10 +26,17 @@ var CurrentUserState = {
       currentUser: currentUser,
       userErrors: userErrors
     });
-    if(userErrors)
-      this.setState({modal: true});
-    else if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id))
+    console.log(userErrors);
+    console.log(currentUser);
+    if(currentUser)
+      if(this.closeModal)
+        this.closeModal();
+    if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id))
       ClientActions.fetchCurrentList();
+    // if(userErrors)
+    //   this.setState({modal: true});
+    // else if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id))
+    //   ClientActions.fetchCurrentList();
   }
 };
 

@@ -37,6 +37,12 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
     border: 1px solid #ccc;
     margin-bottom: 16px;
   }
+  input.error{
+    border: 1px solid #fb5229;
+  }
+  h4.error{
+    color: #fb5229;
+  }
 }
 .guest-login{
   color:#21ce99;
