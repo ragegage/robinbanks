@@ -1,4 +1,5 @@
 var React = require('react'),
+    HashHistory = require('react-router').hashHistory,
     Modal = require('react-modal'),
     LinkedStateMixin = require('react-addons-linked-state-mixin');
 var UserActions = require('./../actions/user_actions'),
@@ -22,6 +23,7 @@ var LoginForm = React.createClass({
   logout: function(e){
     e.preventDefault();
     UserActions.logout();
+    HashHistory.push("/");
   },
 
   login: function(e){
@@ -29,6 +31,15 @@ var LoginForm = React.createClass({
     UserActions.login({
       username: this.state.username,
       password: this.state.password
+    });
+    this.setState({modal: false});
+  },
+
+  guestLogin: function(e){
+    e.preventDefault();
+    UserActions.login({
+      username: "guest",
+      password: "guest"
     });
     this.setState({modal: false});
   },
@@ -62,7 +73,7 @@ var LoginForm = React.createClass({
             onRequestClose={this.closeModal}>
 
             {this.props.userErrors ? this.props.userErrors : ""}
-
+              <h1>Sign Up</h1>
               <form onSubmit={this.signup}>
                 <label>Username
                   <input type="text" valueLink={this.linkState('username')} />
@@ -72,7 +83,9 @@ var LoginForm = React.createClass({
                 </label>
                 <input type="submit" value="Sign Up" />
               </form>
-              <a onClick={this.toggleSignup}>already have an account?</a>
+              <p>Actually, I have an account.
+                <a onClick={this.toggleSignup}>Log in</a>.
+              </p>
           </Modal>
         </div>
       );
@@ -85,7 +98,7 @@ var LoginForm = React.createClass({
               onRequestClose={this.closeModal}>
 
               {this.props.userErrors ? this.props.userErrors : ""}
-
+              <h1>Log In</h1>
               <form onSubmit={this.login}>
                 <label>Username
                   <input type="text" valueLink={this.linkState('username')} />
@@ -93,9 +106,12 @@ var LoginForm = React.createClass({
                 <label>Password
                   <input type="password" valueLink={this.linkState('password')} />
                 </label>
-                <input type="submit" value="Log In" />
+                <input type="submit" value="Let's Go!" />
               </form>
-              <a onClick={this.toggleSignup}>don't have an account?</a>
+              <p>Actually, I don't have an account.
+                <a onClick={this.toggleSignup}>Sign up</a>.
+              </p>
+              <button className="guest-login" onClick={this.guestLogin}>Log in as Guest</button>
           </Modal>
         </div>
       );
