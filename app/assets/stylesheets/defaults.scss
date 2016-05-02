@@ -11,13 +11,19 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   // bold: font-weight: 700
 }
 
+.nav{
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+
 .stock-info{
   display: flex;
 }
 
 .stock-chart{
-  height: 600px;
-  width: 450px;
+  height: 450px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
