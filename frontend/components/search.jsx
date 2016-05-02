@@ -55,7 +55,8 @@ var Search = React.createClass({
         <input type="text"
           value={this.state.query}
           onChange={this.queryChange}
-          onFocus={this.onFocus}/>
+          onFocus={this.onFocus}
+          placeholder="Find a Stock..."/>
         {results}
       </div>
     );

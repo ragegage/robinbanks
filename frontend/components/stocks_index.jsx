@@ -53,7 +53,6 @@ var StocksIndex = React.createClass({
     return (
       <div className="stock-list">
         {this.props.currentUser ? <Search /> : ""}
-        'stocksindex'
         <ul>
           {list}
         </ul>
