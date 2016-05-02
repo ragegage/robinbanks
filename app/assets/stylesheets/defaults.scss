@@ -11,6 +11,33 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   // bold: font-weight: 700
 }
 
+.login, .signup{
+  display:flex;
+  width:300px;
+  flex-direction:column;
+  h1{
+    margin-bottom: 16px;
+  }
+  form{
+    display:flex;
+    flex-direction:column;
+  }
+  h4{
+    color:#8f8f8f;
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ccc;
+  }
+  a{
+    color:#21ce99;
+  }
+  input[type=text], input[type=password]{
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+  }
+}
 .guest-login{
   color:#21ce99;
   background-color: #fff;
@@ -21,6 +48,12 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   display: flex;
   justify-content: space-between;
   height: 60px;
+}
+.logo{
+  cursor: pointer;
+  height:60px;
+  width:300px;
+  background-image: url("../robinbanks.png");
 }
 
 .stock-info{
