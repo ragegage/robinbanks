@@ -3,6 +3,11 @@ var StockChart = require('./stock_chart'),
     StockNews = require('./stock_news');
 
 var StockShow = React.createClass({
+  // componentDidReceiveProps: function(newProps){
+  //   this.forceUpdate();
+  // },
+
+
   render: function(){
     return (
       <div className="stock-detail">

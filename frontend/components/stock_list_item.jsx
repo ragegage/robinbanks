@@ -1,9 +1,14 @@
-var React = require('react');
+var React = require('react'),
+    HashHistory = require('react-router').hashHistory;
 var Sparklines = require('react-sparklines').Sparklines;
 var SparklinesLine = require('react-sparklines').SparklinesLine;
 var ClientActions = require('./../actions/client_actions');
 
 var StockListItem = React.createClass({
+  getInitialState: function(){
+    return {selected: false};
+  },
+
   render: function(){
     if(this.props.item){
       var historicalPriceData = this.props.item.historical_data.map(function(datum){
@@ -15,7 +20,7 @@ var StockListItem = React.createClass({
 
 
     return (
-      <div className="stock-list-item" onClick={this.select}>
+      <div className={"stock-list-item"+(this.state.selected ? " selected" : "")} onClick={this.select}>
         {this.props.item.ticker_symbol}
         <Sparklines data={historicalPriceData} limit={30} width={90} height={20} margin={5}>
           <SparklinesLine style={{stroke: "21ce99", fill: "none"}} />
@@ -33,7 +38,8 @@ var StockListItem = React.createClass({
 
   select: function(e){
     e.preventDefault();
-    // ClientActions.removeListItem(this.props.item.id);
+    this.setState({selected: true})
+    HashHistory.push(this.props.item.ticker_symbol);
   }
 });
 

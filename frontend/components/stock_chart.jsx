@@ -12,13 +12,14 @@ var StockChart = React.createClass({
   },
 
   componentDidMount: function(){
-    HistoricalPriceStore.addListener(this.onChange);
+    this.listener = HistoricalPriceStore.addListener(this.onChange);
     ClientActions.fetchHistoricalPrices(this.props.ticker, this.state.view);
   },
 
-  componentDidReceiveProps: function(){
-    HistoricalPriceStore.addListener(this.onChange);
-    ClientActions.fetchHistoricalPrices(this.state.view);
+  componentWillReceiveProps: function(newProps){
+    if(!this.listener)
+      HistoricalPriceStore.addListener(this.onChange);
+    ClientActions.fetchHistoricalPrices(newProps.ticker, this.state.view);
   },
 
   onChange: function(){
@@ -44,7 +45,7 @@ var StockChart = React.createClass({
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(220,220,220,1)",
-        
+
         lineTension: 0,
         pointBorderWidth: 1,
         pointHoverRadius: 5,

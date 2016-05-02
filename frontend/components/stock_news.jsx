@@ -10,12 +10,13 @@ var StockNews = React.createClass({
   },
 
   componentDidMount: function(){
-    NewsStore.addListener(this.onChange);
+    this.listener = NewsStore.addListener(this.onChange);
     ClientActions.fetchRelatedNews(this.props.ticker);
   },
 
-  componentDidReceiveProps: function(){
-    NewsStore.addListener(this.onChange);
+  componentWillReceiveProps: function(){
+    if(!this.listener)
+      NewsStore.addListener(this.onChange);
     ClientActions.fetchRelatedNews(this.props.ticker);
   },
 
