@@ -29,7 +29,7 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] Organize stocks within watchlist (MVP)
 - [x] Add and delete stocks to/from watchlist (MVP)
 - [x] Search for stocks by ticker symbol (MVP)
-- [ ] View stock information (prices and relevant news) for an individual stock (MVP)
+- [x] View stock information (prices and relevant news) for an individual stock (MVP)
 - [ ] Change time window for an individual stock's price information (non-MVP, but expected)
 - [ ] On hover, display snapshot of price information for an individual stock at a point in time (non-MVP, but expected)
 
