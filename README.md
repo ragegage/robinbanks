@@ -113,8 +113,8 @@ user interface.
 
 **Objective:** APIUtils provide methods to interact with external APIs.
 
-- [ ] set up APIUtils to interact with external APIs
-- [ ] test external API interaction in the console
+- [x] set up APIUtils to interact with external APIs
+- [x] test external API interaction in the console
 
 ### Phase 9: Flesh out Flux Architecture (1 day)
 
@@ -123,15 +123,15 @@ user interface.
 - implement basics of `StockDetail`
   - [x] display current stock price information
   - [x] acquire HistoricalStockPrice information
-  - [ ] acquire StockNews information
+  - [x] acquire StockNews information
   - [x] create skeletons for StockCharts and StockNews
 
 ### Phase 10: Implement StockDetail MVP (1.5 days)
 
 **Objective:** StockDetail shows StockCharts and StockNews
 
-- [ ] implement chart plugin (Rickshaw?) with HistoricalStockPrice data
-- [ ] implement StockNewsItems with StockNews data
+- [x] implement chart plugin (React-Chart.js) with HistoricalStockPrice data
+- [x] implement StockNewsItems with StockNews data
 
 ### Phase 11: Outfit Entire Site with Styling (1.5 days)
 
