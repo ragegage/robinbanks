@@ -6,8 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(username: "guest", password: "guest")
-
 
 stocks = [
 "XOM",
@@ -65,3 +63,8 @@ stocks = [
 stocks.each do |stock|
   Stock.create(ticker_symbol: stock)
 end
+
+
+guest_user = User.create(username: "guest", password: "guest")
+guest_list = List.create(user_id: guest_user.id)
+guest_list.populate_self!

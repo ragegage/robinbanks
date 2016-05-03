@@ -28,6 +28,11 @@ var StockChart = React.createClass({
     this.onChangeList();
   },
 
+  componentWillUnmount: function(){
+    this.hpListener.remove();
+    this.lsListener.remove();
+  },
+
   onChangeChart: function(){
     this.setState({
       historicalPriceData: HistoricalPriceStore.data() || 227.65

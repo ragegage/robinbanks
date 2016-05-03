@@ -21,7 +21,7 @@ var StockListItem = React.createClass({
     var sparkLineColor = (this.state.selected ? "ffffff" : "21ce99");
 
     return (
-      <div className={"stock-list-item"+(this.state.selected ? " selected" : "")} onClick={this.select}>
+      <div className={"stock-list-item"+(this.props.selected ? " selected" : "")} onClick={this.select}>
         {this.props.item.ticker_symbol}
         <Sparklines data={historicalPriceData} limit={22} width={90} height={20} margin={5}>
           <SparklinesLine style={{stroke: sparkLineColor, fill: "none"}} />
@@ -33,14 +33,15 @@ var StockListItem = React.createClass({
   },
 
   delete: function(e){
+    console.log("stocklistitem delete called");
     e.preventDefault();
     ClientActions.removeListItem(this.props.item.id);
   },
 
   select: function(e){
+    console.log("stocklistitem select called");
     e.preventDefault();
-    this.setState({selected: true})
-    HashHistory.push(this.props.item.ticker_symbol);
+    this.props.onSelect(this.props.item.ticker_symbol)
   }
 });
 
