@@ -18,12 +18,13 @@ var StockListItem = React.createClass({
       var historicalPriceData = [];
     }
 
+    var sparkLineColor = (this.state.selected ? "ffffff" : "21ce99");
 
     return (
       <div className={"stock-list-item"+(this.state.selected ? " selected" : "")} onClick={this.select}>
         {this.props.item.ticker_symbol}
-        <Sparklines data={historicalPriceData} limit={30} width={90} height={20} margin={5}>
-          <SparklinesLine style={{stroke: "21ce99", fill: "none"}} />
+        <Sparklines data={historicalPriceData} limit={22} width={90} height={20} margin={5}>
+          <SparklinesLine style={{stroke: sparkLineColor, fill: "none"}} />
         </Sparklines>
         <button>${this.props.item.price}</button>
         <button className="list-item-delete" onClick={this.delete}>Delete</button>

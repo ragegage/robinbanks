@@ -38,7 +38,7 @@ class Api::HistoricalPriceDataController < ApplicationController
     @data = JSON.parse string
 
     if @data["query"]["count"].to_i > 0
-      @data = @data["query"]["results"]["quote"]
+      @data = @data["query"]["results"]["quote"].reverse
     else
       @data = nil
       @errors = ["data could not be loaded"]

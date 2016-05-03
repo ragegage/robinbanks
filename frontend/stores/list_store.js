@@ -18,6 +18,16 @@ ListStore.listErrors = function(){
   else return null;
 };
 
+ListStore.currentPriceByTicker = function(ticker){
+  var currentPrice;
+  if(_list)
+    for (var i = 0; i < _list.length; i++)
+      if(_list[i].ticker_symbol === ticker)
+        currentPrice = _list[i].price;
+
+  return currentPrice;
+};
+
 ListStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case ListConstants.RECEIVE_NEW_LIST:

@@ -1,29 +1,44 @@
 var React = require('react');
 var LineChart = require('react-chartjs').Line;
 var ClientActions = require('./../actions/client_actions'),
-    HistoricalPriceStore = require('./../stores/historical_price_store');
+    HistoricalPriceStore = require('./../stores/historical_price_store'),
+    ListStore = require('./../stores/list_store');
 
 var StockChart = React.createClass({
   getInitialState: function(){
     return {
       view: "1M",
-      historicalPriceData: []
+      historicalPriceData: [],
+      currentPrice: 227.65
     };
   },
 
   componentDidMount: function(){
-    this.listener = HistoricalPriceStore.addListener(this.onChange);
+    this.hpListener = HistoricalPriceStore.addListener(this.onChangeChart);
+    this.lsListener = ListStore.addListener(this.onChangeList);
     ClientActions.fetchHistoricalPrices(this.props.ticker, this.state.view);
   },
 
   componentWillReceiveProps: function(newProps){
-    if(!this.listener)
-      HistoricalPriceStore.addListener(this.onChange);
+    if(!this.hpListener)
+      HistoricalPriceStore.addListener(this.onChangeChart);
+    if(!this.lsListener)
+      this.lsListener = ListStore.addListener(this.onChangeList);
     ClientActions.fetchHistoricalPrices(newProps.ticker, this.state.view);
+    this.onChangeList();
   },
 
-  onChange: function(){
-    this.setState({historicalPriceData: HistoricalPriceStore.data()});
+  onChangeChart: function(){
+    this.setState({
+      historicalPriceData: HistoricalPriceStore.data() || 227.65
+    });
+  },
+
+  onChangeList: function(){
+    console.log("stockchart calls currentPriceByTicker");
+    this.setState({
+      currentPrice: ListStore.currentPriceByTicker(this.props.ticker)
+    });
   },
 
   render: function(){
@@ -92,13 +107,27 @@ var StockChart = React.createClass({
 
     var graph = (<LineChart data={chartData} options={chartOptions} width="600" height="300"/>);
 
+    if(this.state.historicalPriceData.length > 0)
+      var priceChange = this.state.currentPrice - this.state.historicalPriceData[0].close
+    else
+      var priceChange = 0;
 
     return (
       <div className="stock-chart">
-        <div className="chart-main-price"><h1>$227.65</h1></div>
-        <div className="chart-main-details"><h4>+$6.00 (5%) PAST 3M</h4></div>
+        <div className="chart-main-price">
+          <h1>${this.state.currentPrice}</h1>
+        </div>
+        <div className="chart-main-details">
+          <h4>
+            {priceChange > 0 ? "+" : "-"}${priceChange.toFixed(2)}
+            ({(100*(priceChange/this.state.currentPrice)).toFixed(2)}%)
+            PAST {this.state.view}
+          </h4>
+        </div>
         <div className="chart-chart">{graph}</div>
-        <div className="chart-options"><h4>1M 3M 6M 1Y ALL</h4></div>
+        <div className="chart-options">
+          <h4>1M 3M 6M 1Y ALL</h4>
+        </div>
       </div>
     );
   },
