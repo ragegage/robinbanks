@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426210616) do
+ActiveRecord::Schema.define(version: 20160503171802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160426210616) do
   end
 
   add_index "stock_list_items", ["list_id"], name: "index_stock_list_items_on_list_id", using: :btree
+  add_index "stock_list_items", ["stock_id", "list_id"], name: "index_stock_list_items_on_stock_id_and_list_id", unique: true, using: :btree
   add_index "stock_list_items", ["stock_id"], name: "index_stock_list_items_on_stock_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|

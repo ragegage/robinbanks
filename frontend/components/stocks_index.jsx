@@ -59,6 +59,9 @@ var StocksIndex = React.createClass({
 
     // if(this.state.listErrors)
     //   list = this.state.listErrors;
+    if(this.state.listErrors)
+      if(this.state.listErrors[0] === "Stock has already been taken")
+        alert("You are already watching that stock!");
 
     return (
       <div className="stock-list">
@@ -72,7 +75,6 @@ var StocksIndex = React.createClass({
 
   changeSelected: function(ticker_symbol){
     console.log("changeSelected runs");
-    debugger;
     if(this.state.list && this.state.list.length === 0){
       this.setState({selected: null});
       HashHistory.push("/");

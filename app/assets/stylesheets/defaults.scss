@@ -130,6 +130,23 @@ label{
   border-bottom: 1px solid #8f8f8f;
 }
 
+.news-result-item{
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  h4{
+    margin: 0px;
+    padding-top: 8px;
+  }
+  a{
+    color: #000;
+    text-decoration: none;
+  }
+}
+
 .search-result-item:hover {
   background-color: #ccc;
   cursor: pointer;

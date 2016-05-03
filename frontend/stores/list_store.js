@@ -61,6 +61,6 @@ var addToList = function(newListItem){
 };
 
 var setErrors = function(errors){
-  _listErrors = errors;
+  _listErrors = errors.responseJSON;
   _list = null;
 };
