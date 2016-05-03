@@ -9,7 +9,7 @@ var StockChart = React.createClass({
     return {
       view: "1M",
       historicalPriceData: [],
-      currentPrice: 227.65
+      currentPrice: 0.00
     };
   },
 
@@ -35,7 +35,7 @@ var StockChart = React.createClass({
 
   onChangeChart: function(){
     this.setState({
-      historicalPriceData: HistoricalPriceStore.data() || 227.65
+      historicalPriceData: HistoricalPriceStore.data() || 0.00
     });
   },
 
@@ -132,14 +132,25 @@ var StockChart = React.createClass({
         </div>
         <div className="chart-chart">{graph}</div>
         <div className="chart-options">
-          <h4>1M 3M 6M 1Y ALL</h4>
+          <h4>
+            <a className={this.state.view === "1M" ? "selected" : ""}
+              onClick={this.onOptionsClick}>1M</a>&nbsp;
+            <a className={this.state.view === "3M" ? "selected" : ""}
+              onClick={this.onOptionsClick}>3M</a>&nbsp;
+            <a className={this.state.view === "6M" ? "selected" : ""}
+              onClick={this.onOptionsClick}>6M</a>&nbsp;
+            <a className={this.state.view === "1Y" ? "selected" : ""}
+              onClick={this.onOptionsClick}>1Y</a>&nbsp;
+          </h4>
         </div>
       </div>
     );
   },
 
   onOptionsClick(e){
+    debugger;
     this.setState({view: e.target.text});
+    ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
   }
 });
 

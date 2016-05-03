@@ -133,7 +133,7 @@ var ApiUtil = {
 
   // external data utils
   fetchHistoricalPrices: function(ticker, range){
-    // dateRange = {start: "2016-03-24", end: "2016-04-24"}
+    // range in ["1M", "3M", "6M", "1Y"]
     $.ajax({
       method: 'GET',
       url: 'api/historical_price_data',
