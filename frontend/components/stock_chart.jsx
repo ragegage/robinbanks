@@ -47,12 +47,13 @@ var StockChart = React.createClass({
   },
 
   render: function(){
+    if(this.state.historicalPriceData.length > 0)
+      var priceChange = this.state.currentPrice - this.state.historicalPriceData[0].close
+    else
+      var priceChange = 0;
+
+    var chartColor = (priceChange >= 0 ? "#21ce99" : "#fb5229");
     var prices = this.state.historicalPriceData.map(function(datum){return datum.close;});
-    var chartOptions = {
-      labels: this.state.historicalPriceData.map(function(datum){return datum.date;}),
-      borderColor: "#21ce99",
-      label: ""
-    };
 
 
     var chartData = {
@@ -60,8 +61,8 @@ var StockChart = React.createClass({
       datasets: [{
         data: prices,
         fillColor: "#fff",
-        strokeColor: "#21ce99",
-        pointColor: "#21ce99",
+        strokeColor: chartColor,
+        pointColor: chartColor,
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(220,220,220,1)",
@@ -112,20 +113,20 @@ var StockChart = React.createClass({
 
     var graph = (<LineChart data={chartData} options={chartOptions} width="600" height="300"/>);
 
-    if(this.state.historicalPriceData.length > 0)
-      var priceChange = this.state.currentPrice - this.state.historicalPriceData[0].close
-    else
-      var priceChange = 0;
 
     return (
       <div className="stock-chart">
         <div className="chart-main-price">
-          <h1>${this.state.currentPrice}</h1>
+          <h1>${this.state.currentPrice.toFixed(2)}</h1>
         </div>
         <div className="chart-main-details">
           <h4>
-            {priceChange > 0 ? "+" : "-"}${priceChange.toFixed(2)}
-            ({(100*(priceChange/this.state.currentPrice)).toFixed(2)}%)
+            <span className={(priceChange >= 0 ? "good-news" : "bad-news")}>
+              {priceChange >= 0 ? "+" : "-"}${Math.abs(priceChange).toFixed(2)}
+              &nbsp;
+              ({(100*(priceChange/this.state.currentPrice)).toFixed(2)}%)
+            </span>
+            &nbsp;
             PAST {this.state.view}
           </h4>
         </div>

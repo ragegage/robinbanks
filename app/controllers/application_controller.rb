@@ -70,6 +70,8 @@ class ApplicationController < ActionController::Base
         ordered_historical_data = get_array_of_historical_data month_data
       end
 
+      ordered_historical_data.map! {|stock_data| stock_data.reverse }
+
       @ordered_list = @ordered_list.zip(ordered_historical_data)
     rescue JSON::ParserError => e2
       @errors << e2

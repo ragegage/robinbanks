@@ -1,5 +1,6 @@
 var React = require('react'),
     HashHistory = require('react-router').hashHistory;
+// var SortableList = require('./../mixins/rubaxa_sortable');
 var ClientActions = require('./../actions/client_actions'),
     ListStore = require('./../stores/list_store'),
     CurrentUserState = require('./../mixins/current_user_state'),
@@ -7,6 +8,8 @@ var ClientActions = require('./../actions/client_actions'),
     Search = require('./search');
 
 var StocksIndex = React.createClass({
+  // mixins: [SortableList],
+
   getInitialState: function(){
     return {
       list: ListStore.list(),
@@ -46,17 +49,18 @@ var StocksIndex = React.createClass({
     var self = this;
 
     var list = "";
-    var count = 0;
 
     if(this.props.currentUser && this.state.list)
-      list =  this.state.list.map(function(item){
-                count++;
+      list =  this.state.list.map(function(item, idx){
                 return <StockListItem item={item}
-                          key={count}
+                          key={idx}
                           selected={self.state.selected === item.ticker_symbol}
-                          onSelect={self.changeSelected}/>
+                          onSelect={self.changeSelected}
+                          />
               });
 
+    var placeholder = document.createElement("li");
+    placeholder.className = "placeholder";
     // if(this.state.listErrors)
     //   list = this.state.listErrors;
     if(this.state.listErrors)
@@ -66,7 +70,7 @@ var StocksIndex = React.createClass({
     return (
       <div className="stock-list">
         {this.props.currentUser ? <Search /> : ""}
-        <ul>
+        <ul onDragOver={this.dragOver}>
           {list}
         </ul>
       </div>
@@ -85,7 +89,43 @@ var StocksIndex = React.createClass({
       if(ticker_symbol)
         HashHistory.push(ticker_symbol);
     }
+  },
+
+
+  handleSort: function(e){
+    console.log("SORT SORT SORT");
+    debugger;
   }
+
+  // drag: function(e){
+  //   e.preventDefault();
+  //   console.log("drag drag drag");
+  // },
+  //
+  // dragStart: function(e){
+  //   console.log("dragstart");
+  //   this.dragged = e.currentTarget;
+  //   e.dataTransfer.effectAllowed = 'move';
+  //
+  //   e.dataTransfer.setData("text/html", e.currentTarget);
+  // },
+  // dragEnd: function(e){
+  //   console.log("dragend");
+  //   this.dragged.style.display = "block";
+  //   this.dragged.parentNode.removeChild(placeholder);
+  //
+  //   var from = Number(this.dragged.dataset.id);
+  //   var to = Number(this.over.dataset.id);
+  //   debugger;
+  // },
+  // dragOver: function(e){
+  //   console.log("dragover");
+  //   e.preventDefault();
+  //   this.dragged.style.display = "none";
+  //   if(e.target.className == "placeholder") return;
+  //   this.over = e.target;
+  //   e.target.parentNode.insertBefore(placeholder, e.target);
+  // }
 });
 
 module.exports = StocksIndex;

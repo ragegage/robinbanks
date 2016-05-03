@@ -18,7 +18,10 @@ var StockListItem = React.createClass({
       var historicalPriceData = [];
     }
 
-    var sparkLineColor = (this.state.selected ? "ffffff" : "21ce99");
+    var priceWentUp = (this.props.item.price - this.props.item.historical_data[0].close) >= 0;
+
+    var sparkLineColor = (priceWentUp ? "21ce99" : "fb5229")
+    sparkLineColor = (this.state.selected ? "ffffff" : sparkLineColor);
 
     return (
       <div className={"stock-list-item"+(this.props.selected ? " selected" : "")} onClick={this.select}>
@@ -26,7 +29,7 @@ var StockListItem = React.createClass({
         <Sparklines data={historicalPriceData} limit={22} width={90} height={20} margin={5}>
           <SparklinesLine style={{stroke: sparkLineColor, fill: "none"}} />
         </Sparklines>
-        <button>${this.props.item.price}</button>
+        <button className={priceWentUp ? "" : "bad-news"}>${this.props.item.price.toFixed(2)}</button>
         <button className="list-item-delete" onClick={this.delete}>Delete</button>
       </div>
     );
