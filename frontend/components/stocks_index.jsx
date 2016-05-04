@@ -89,43 +89,7 @@ var StocksIndex = React.createClass({
       if(ticker_symbol)
         HashHistory.push(ticker_symbol);
     }
-  },
-
-
-  handleSort: function(e){
-    console.log("SORT SORT SORT");
-    debugger;
   }
-
-  // drag: function(e){
-  //   e.preventDefault();
-  //   console.log("drag drag drag");
-  // },
-  //
-  // dragStart: function(e){
-  //   console.log("dragstart");
-  //   this.dragged = e.currentTarget;
-  //   e.dataTransfer.effectAllowed = 'move';
-  //
-  //   e.dataTransfer.setData("text/html", e.currentTarget);
-  // },
-  // dragEnd: function(e){
-  //   console.log("dragend");
-  //   this.dragged.style.display = "block";
-  //   this.dragged.parentNode.removeChild(placeholder);
-  //
-  //   var from = Number(this.dragged.dataset.id);
-  //   var to = Number(this.over.dataset.id);
-  //   debugger;
-  // },
-  // dragOver: function(e){
-  //   console.log("dragover");
-  //   e.preventDefault();
-  //   this.dragged.style.display = "none";
-  //   if(e.target.className == "placeholder") return;
-  //   this.over = e.target;
-  //   e.target.parentNode.insertBefore(placeholder, e.target);
-  // }
 });
 
 module.exports = StocksIndex;

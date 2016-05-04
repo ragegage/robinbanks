@@ -148,7 +148,6 @@ var StockChart = React.createClass({
   },
 
   onOptionsClick(e){
-    debugger;
     this.setState({view: e.target.text});
     ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
   }
