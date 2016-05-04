@@ -32,6 +32,17 @@ var StockNews = React.createClass({
       })
     );
 
+    var loader = (
+      <div className="loader">
+        <div className="bounce1"></div>
+        <div className="bounce2"></div>
+        <div className="bounce3"></div>
+      </div>
+    );
+
+    if(newsItems.length === 0)
+      var newsItems = loader;
+
 
     return (
       <div className="stock-news">

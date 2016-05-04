@@ -37,10 +37,13 @@
     "react-anything-sortable": "^1.4.4",
     "react-chartjs": "^0.7.3",
     "react-dom": "^15.0.1",
+    "react-loader": "^2.4.0",
     "react-modal": "^1.2.1",
     "react-pathjs-chart": "^0.3.5",
+    "react-preloader-icon": "0.0.6",
     "react-router": "^2.3.0",
     "react-sparklines": "^1.5.2",
+    "react-spinkit": "^1.1.7",
     "webpack": "^1.13.0"
   },
   "engines": {

@@ -55,18 +55,19 @@ var StockChart = React.createClass({
     var chartColor = (priceChange >= 0 ? "#21ce99" : "#fb5229");
     var prices = this.state.historicalPriceData.map(function(datum){return datum.close;});
 
+    debugger;
 
     var chartData = {
       labels: [],
       datasets: [{
         data: prices,
-        fillColor: "#fff",
         strokeColor: chartColor,
+
+        fillColor: "#fff",
         pointColor: chartColor,
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(220,220,220,1)",
-
         lineTension: 0,
         pointBorderWidth: 1,
         pointHoverRadius: 5,
@@ -74,44 +75,37 @@ var StockChart = React.createClass({
         pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
         pointRadius: 1,
-        pointHitRadius: 10,
+        pointHitRadius: 10
       }]
     };
     var chartOptions = {
+      scaleShowHorizontalLines: false,
+      bezierCurveTension: 0,
+      pointDot: false,
+      pointHitDetectionRadius: 1,
+      datasetFill: false,
       responsive: true,
       tooltips: {
         mode: 'single',
-        callbacks: {
-          // beforeTitle: function() {
-          //     return '...beforeTitle';
-          // },
-          // afterTitle: function() {
-          //     return '...afterTitle';
-          // },
-          // beforeBody: function() {
-          //     return '...beforeBody';
-          // },
-          // afterBody: function() {
-          //     return '...afterBody';
-          // },
-          // beforeFooter: function() {
-          //     return '...beforeFooter';
-          // },
-          // footer: function() {
-          //     return 'Footer';
-          // },
-          // afterFooter: function() {
-          //     return '...afterFooter';
-          // },
-        }
+        callbacks: {}
       },
       hover: {
           mode: 'dataset'
       }
     };
 
+    var loader = (
+      <div className="loader">
+        <div className="bounce1"></div>
+        <div className="bounce2"></div>
+        <div className="bounce3"></div>
+      </div>
+    );
 
-    var graph = (<LineChart data={chartData} options={chartOptions} width="600" height="300"/>);
+    if(this.state.historicalPriceData.length === 0)
+      var graph = loader;
+    else var graph = (<LineChart data={chartData} options={chartOptions}
+                               width="600" height="300" />);
 
 
     return (
@@ -130,7 +124,9 @@ var StockChart = React.createClass({
             PAST {this.state.view}
           </h4>
         </div>
-        <div className="chart-chart">{graph}</div>
+        <div className="chart-chart">
+          {graph}
+        </div>
         <div className="chart-options">
           <h4>
             <a className={this.state.view === "1M" ? "selected" : ""}
