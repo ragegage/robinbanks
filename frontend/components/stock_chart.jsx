@@ -55,7 +55,6 @@ var StockChart = React.createClass({
     var chartColor = (priceChange >= 0 ? "#21ce99" : "#fb5229");
     var prices = this.state.historicalPriceData.map(function(datum){return datum.close;});
 
-    debugger;
 
     var chartData = {
       labels: [],
@@ -102,10 +101,8 @@ var StockChart = React.createClass({
       </div>
     );
 
-    if(this.state.historicalPriceData.length === 0)
-      var graph = loader;
-    else var graph = (<LineChart data={chartData} options={chartOptions}
-                               width="600" height="300" />);
+    var graph = (<LineChart data={chartData} options={chartOptions}
+                             width="600" height="300" />);
 
 
     return (
@@ -125,6 +122,7 @@ var StockChart = React.createClass({
           </h4>
         </div>
         <div className="chart-chart">
+          {this.state.historicalPriceData.length === 0 ? loader : ""}
           {graph}
         </div>
         <div className="chart-options">
