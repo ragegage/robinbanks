@@ -9,7 +9,8 @@ var StockChart = React.createClass({
     return {
       view: "1M",
       historicalPriceData: [],
-      currentPrice: 0.00
+      currentPrice: 0.00,
+      loading: true
     };
   },
 
@@ -35,7 +36,8 @@ var StockChart = React.createClass({
 
   onChangeChart: function(){
     this.setState({
-      historicalPriceData: HistoricalPriceStore.data() || 0.00
+      historicalPriceData: HistoricalPriceStore.data() || 0.00,
+      loading: false
     });
   },
 
@@ -122,7 +124,7 @@ var StockChart = React.createClass({
           </h4>
         </div>
         <div className="chart-chart">
-          {this.state.historicalPriceData.length === 0 ? loader : ""}
+          {this.state.loading ? loader : ""}
           {graph}
         </div>
         <div className="chart-options">
@@ -142,7 +144,7 @@ var StockChart = React.createClass({
   },
 
   onOptionsClick(e){
-    this.setState({view: e.target.text});
+    this.setState({view: e.target.text, loading: true});
     ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
   }
 });
