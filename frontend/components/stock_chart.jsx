@@ -1,8 +1,8 @@
 var React = require('react');
-var LineChart = require('react-chartjs').Line;
 var ClientActions = require('./../actions/client_actions'),
     HistoricalPriceStore = require('./../stores/historical_price_store'),
     ListStore = require('./../stores/list_store');
+var OwnGraph = require('./own_graph');
 
 var StockChart = React.createClass({
   getInitialState: function(){
@@ -58,43 +58,6 @@ var StockChart = React.createClass({
     var prices = this.state.historicalPriceData.map(function(datum){return datum.close;});
 
 
-    var chartData = {
-      labels: [],
-      datasets: [{
-        data: prices,
-        strokeColor: chartColor,
-
-        fillColor: "#fff",
-        pointColor: chartColor,
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
-        lineTension: 0,
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10
-      }]
-    };
-    var chartOptions = {
-      scaleShowHorizontalLines: false,
-      bezierCurveTension: 0,
-      pointDot: false,
-      pointHitDetectionRadius: 1,
-      datasetFill: false,
-      responsive: true,
-      tooltips: {
-        mode: 'single',
-        callbacks: {}
-      },
-      hover: {
-          mode: 'dataset'
-      }
-    };
-
     var loader = (
       <div className="loader">
         <div className="bounce1"></div>
@@ -103,7 +66,7 @@ var StockChart = React.createClass({
       </div>
     );
 
-    var graph = (<LineChart data={chartData} options={chartOptions}
+    var graph = (<OwnGraph data={prices} color={chartColor}
                              width="600" height="300" />);
 
 
