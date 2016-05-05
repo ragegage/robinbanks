@@ -10,6 +10,7 @@ var StockChart = React.createClass({
       view: "1M",
       historicalPriceData: [],
       currentPrice: 0.00,
+      tempCurrentPrice: null,
       loading: true
     };
   },
@@ -49,8 +50,9 @@ var StockChart = React.createClass({
   },
 
   render: function(){
+    var currentPrice = this.state.tempCurrentPrice || this.state.currentPrice;
     if(this.state.historicalPriceData.length > 0)
-      var priceChange = this.state.currentPrice - this.state.historicalPriceData[0].close
+      var priceChange = currentPrice - this.state.historicalPriceData[0].close
     else
       var priceChange = 0;
 
@@ -66,21 +68,21 @@ var StockChart = React.createClass({
       </div>
     );
 
-    var graph = (<OwnGraph data={prices} color={chartColor}
+    var graph = (<OwnGraph onMouseMove={this.graphMouseMove} data={prices} color={chartColor}
                              width="600" height="300" />);
 
 
     return (
       <div className="stock-chart">
         <div className="chart-main-price">
-          <h1>${this.state.currentPrice.toFixed(2)}</h1>
+          <h1>${currentPrice.toFixed(2)}</h1>
         </div>
         <div className="chart-main-details">
           <h4>
             <span className={(priceChange >= 0 ? "good-news" : "bad-news")}>
               {priceChange >= 0 ? "+" : "-"}${Math.abs(priceChange).toFixed(2)}
               &nbsp;
-              ({(100*(priceChange/this.state.currentPrice)).toFixed(2)}%)
+              ({(100*(priceChange/currentPrice)).toFixed(2)}%)
             </span>
             &nbsp;
             PAST {this.state.view}
@@ -106,9 +108,27 @@ var StockChart = React.createClass({
     );
   },
 
-  onOptionsClick(e){
+  onOptionsClick: function(e){
     this.setState({view: e.target.text, loading: true});
     ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
+  },
+
+  graphMouseMove: function(e, el){
+    e.preventDefault();
+    var elLocation = el.getBoundingClientRect().left;
+    var relativeLocation = e.pageX - elLocation;
+    var numPoints = this.state.historicalPriceData.length;
+    var elWidth = 600;
+    var hoverWidth = elWidth / numPoints;
+
+    var idx = Math.floor(relativeLocation / hoverWidth);
+
+    console.log(this.state.historicalPriceData[idx]);
+
+    if(idx < 3) idx = 0;
+    else idx = idx - 2;
+
+    this.setState({tempCurrentPrice: this.state.historicalPriceData[idx].close});
   }
 });
 
