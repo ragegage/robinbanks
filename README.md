@@ -47,10 +47,67 @@ When a user searches for a stock by its ticker, the stocks whose tickers match t
 When a user logs in, the stocks on that user's list are selected using an ActiveRecord query (user.list.stocks) and combined with both the current price and the past month's prices and passed to the frontend as JSON.
 
 Upon selecting a stock, the appropriate historical data (past month/3M/6M/1Y) are passed to the frontend, as are the most recently published news articles about that company.
+```ruby
+next_node_id = list.list_head
+@ordered_list = []
+@errors = []
+
+
+# generates ordered array
+while(next_node_id) do
+  node = StockListItem.includes(:stock).find(next_node_id)
+  @ordered_list << node
+  next_node_id = node.next_stock_list_id
+end
+```
 
 The price data is retrieved from various Yahoo APIs:
-- the current price from Yahoo's finance API (https://finance.yahoo.com/webservice/v1/symbols/STOCK_TICKER/quote?format=json)
-- the historical price data from a variety of tables accessible via YQL (https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%20%22***STOCK_TICKER***%22%20and%20startDate%20%3D%20%22***START_DATE***%22%20and%20%20endDate%20%3D%20%22***END_DATE***%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys)
+- the current price from Yahoo's finance API 
+```ruby
+  current_price_url = "https://finance.yahoo.com/webservice/v1/symbols/"
+          .concat(@ordered_list.map(){|i| i.stock.ticker_symbol}.join(","))
+          .concat("/quote?format=json")
+
+  current_price_string = HTTP.get(current_price_url).to_s
+
+  begin
+    current_price_data = JSON.parse current_price_string
+    @ordered_list = @ordered_list.zip(current_price_data["list"]["resources"])
+  rescue JSON::ParserError => e
+    @errors << e
+  end
+```
+- the historical price data from a variety of tables accessible via YQL
+```ruby
+  month_data_url = "https://query.yahooapis.com/v1/public/yql"
+          .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20%20")
+          .concat("('#{@ordered_list.map(){|i| i[0].stock.ticker_symbol}.join("','")}')")
+          .concat("%20and%20startDate%20%3D%20%22")
+          .concat(Date.today.prev_month.to_s)
+          .concat("%22%20and%20%20endDate%20%3D%20%22")
+          .concat(Date.today.to_s)
+          .concat("%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
+
+  month_data_string = HTTP.get(month_data_url).to_s
+
+  begin
+    month_data = JSON.parse month_data_string
+
+    ordered_historical_data = []
+
+    if month_data["query"]["count"].to_i > 0
+      month_data = month_data["query"]["results"]["quote"]
+
+      ordered_historical_data = get_array_of_historical_data month_data
+    end
+
+    ordered_historical_data.map! {|stock_data| stock_data.reverse }
+
+    @ordered_list = @ordered_list.zip(ordered_historical_data)
+  rescue JSON::ParserError => e2
+    @errors << e2
+  end
+```
 - the related news articles from Yahoo Finance's RSS feed API (http://feeds.finance.yahoo.com/rss/2.0/headline?s=GOOG&region=US&lang=en-US) 
 
 Once the data reach the frontend, they are handled by the appropriate stores:
