@@ -22,7 +22,16 @@ Robinbanks gives you day-by-day pricing data on an easy-to-read chart, as well a
 stockshow-screenshot
 
 Robinbanks keeps your password data safe.
-bcrypt-sourcecode
+```ruby
+def password=(password)
+  @password = password
+  self.password_digest = BCrypt::Password.create(password)
+end
+
+def is_password?(password)
+  BCrypt::Password.new(self.password_digest).is_password?(password)
+end
+```
 
 ##Implementation
 
