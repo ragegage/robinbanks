@@ -3,7 +3,9 @@
 [live][robinbanks]
 [robinbanks]: http://www.robinbanks.herokuapp.com
 
-####Robinbanks provides you with live* data on all the stocks you might be interested in. Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
+####Robinbanks provides you with live* data on all the stocks you might be interested in. 
+####Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. 
+####It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
 
 ##Features
 
@@ -46,3 +48,5 @@ Once the data reach the frontend, they are handled by the appropriate stores:
 The Sparklines are made using the `react-sparklines` module.
 
 The Chart is made using a custom-built Chart component that renders the data onto an HTML5 Canvas element, dynamically updates when it receives new data, and provides customizeable hover functionality.
+
+*data is not guaranteed to be live.
