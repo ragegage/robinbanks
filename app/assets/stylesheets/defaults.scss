@@ -222,14 +222,30 @@ li.placeholder:before{
   background-color: #ccc;
   cursor: pointer;
 }
+.search-result-item:hover:after {
+  content: "Add to your list";
+  border: 1px solid #8f8f8f;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-left: 20px;
+}
+
 
 .stock-list-item{
   cursor: pointer;
   .list-item-delete{
-    display:none
+    display:none;
+  }
+  .ticker-symbol{
+    display: inline-block;
+    width:70px;
   }
 }
 .stock-list-item:hover {
+  .good-news, .bad-news{
+    display:none;
+  }
   .list-item-delete{
     display:inline;
     color: #8f8f8f;
@@ -249,11 +265,6 @@ li.placeholder:before{
     color: #000;
   }
 }
-
-.search-result-item:hover:after {
-  content: "Add to your list";
-}
-
 
 .bad-news{
   color: #fff;
@@ -306,4 +317,22 @@ li.placeholder:before{
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #000;
+    background-size: cover;
 }

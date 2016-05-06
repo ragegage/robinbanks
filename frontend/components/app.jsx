@@ -14,6 +14,10 @@ var App = React.createClass({
           <StocksIndex userErrors={this.state.userErrors} currentUser={this.state.currentUser} />
           {this.props.children}
         </div>
+        {this.props.location.pathname === "/" ? (<video autoPlay loop id="bgvid">
+          <source src="dollars4.webm" type="video/webm" />
+          <source src="dollars4.mp4" type="video/mp4" />
+        </video>) : ""}
       </div>
     );
   }

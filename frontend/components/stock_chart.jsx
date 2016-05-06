@@ -16,12 +16,14 @@ var StockChart = React.createClass({
   },
 
   componentDidMount: function(){
+    console.log("stockchart didmount");
     this.hpListener = HistoricalPriceStore.addListener(this.onChangeChart);
     this.lsListener = ListStore.addListener(this.onChangeList);
     ClientActions.fetchHistoricalPrices(this.props.ticker, this.state.view);
   },
 
   componentWillReceiveProps: function(newProps){
+    console.log("stockchart wrprops");
     if(!this.hpListener)
       HistoricalPriceStore.addListener(this.onChangeChart);
     if(!this.lsListener)
@@ -109,6 +111,7 @@ var StockChart = React.createClass({
   },
 
   onOptionsClick: function(e){
+    console.log("stockchart optionsclick");
     this.setState({view: e.target.text, loading: true});
     ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
   },

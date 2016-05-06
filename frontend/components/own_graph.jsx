@@ -2,6 +2,9 @@ var React = require('react');
 
 var OwnGraph = React.createClass({
   componentWillReceiveProps: function(newProps) {
+    console.log("owngraph wrprops");
+    console.log(newProps);
+    console.log(this.props);
     var ctx = this.refs.canvas.getContext('2d');
     this.drawLines(ctx, newProps);
   },
