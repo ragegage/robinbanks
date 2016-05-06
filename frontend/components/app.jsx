@@ -14,10 +14,14 @@ var App = React.createClass({
           <StocksIndex userErrors={this.state.userErrors} currentUser={this.state.currentUser} />
           {this.props.children}
         </div>
-        {this.props.location.pathname === "/" ? (<video autoPlay loop id="bgvid">
-          <source src="dollars.webm" type="video/webm" />
-          <source src="dollars.mp4" type="video/mp4" />
-        </video>) : ""}
+        {this.props.location.pathname === "/" ? (
+        <div className="fullscreen">
+          <video autoPlay loop id="bgvid">
+            <source src="dollars.webm" type="video/webm" />
+            <source src="dollars.mp4" type="video/mp4" />
+          </video>
+          <div className="splash-logo"></div>
+          </div>) : ""}
       </div>
     );
   }

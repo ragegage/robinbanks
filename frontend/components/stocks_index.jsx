@@ -69,13 +69,15 @@ var StocksIndex = React.createClass({
       if(this.state.listErrors[0] === "Stock has already been taken")
         alert("You are already watching that stock!");
 
-    var loader = (
-      <div className="loader">
+    var loader = (this.props.currentUser ?
+      (<div className="loader">
         <div className="bounce1"></div>
         <div className="bounce2"></div>
         <div className="bounce3"></div>
-      </div>
-    );
+      </div>)
+      :
+      "");
+    
 
     return (
       <div className="stock-list">
