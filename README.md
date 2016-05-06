@@ -1,156 +1,48 @@
-# RobinBanks
-
-[Heroku link][robinbanks]
-
+![robinbanks-logo]
+[robinbanks-logo]: ./public/robinbanks.png
+[live][robinbanks]
 [robinbanks]: http://www.robinbanks.herokuapp.com
 
-## Minimum Viable Product
+###Robinbanks provides you with live* data on all the stocks you might be interested in. Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
 
-RobinBanks is a web application inspired by Robinhood that will be built using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+##Features
 
-- [ ] New account creation, login, and guest/demo login
-- [ ] Smooth, bug-free navigation
-- [ ] Adequate seed data to demonstrate the site's features
-- [ ] Minimally necessary features for a Robinhood-inspired site: a watchlist of stocks, watchlist editing (addition, removal, and reordering of stocks), and company information including latest and historical stock prices and relevant news.
-- [ ] Hosting on Heroku
-- [ ] CSS styling that is satisfactorily visually appealing
-- [ ] A production README, replacing this README (at least as good as the one at [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md))
+Robinbanks allows you to sign up to save your data for later, or log in as a guest user to quickly check the site out.
+login-screenshot
 
-## Product Goals and Priorities
+Robinbanks fetches your personal settings upon login, including your watchlist of stocks.
+index-screenshot
 
-RobinBanks will allow users to do the following:
+Robinbanks lets you add and remove stocks from your watchlist.
+search-screenshot
 
-<!-- This is a Markdown checklist. Use it to keep track of your
-progress. Put an x between the brackets for a checkmark: [x] -->
+Robinbanks gives you day-by-day pricing data on an easy-to-read chart, as well as related news articles, for any of your stocks.
+stockshow-screenshot
 
-- [x] Create an account (MVP)
-- [x] Log in / Log out, including as a Guest/Demo User (MVP)
-- [x] View stock price information on watchlist (MVP)
-- [ ] Organize stocks within watchlist (MVP)
-- [x] Add and delete stocks to/from watchlist (MVP)
-- [x] Search for stocks by ticker symbol (MVP)
-- [x] View stock information (prices and relevant news) for an individual stock (MVP)
-- [ ] Change time window for an individual stock's price information (non-MVP, but expected)
-- [ ] On hover, display snapshot of price information for an individual stock at a point in time (non-MVP, but expected)
+Robinbanks keeps your password data safe.
+bcrypt-sourcecode
 
-## Design Docs
-* [View Wireframes][views]
-* [React Components][components]
-* [Flux Cycles][flux-cycles]
-* [API endpoints][api-endpoints]
-* [DB schema][schema]
+##Implementation
 
-[views]: ./docs/views.md
-[components]: ./docs/components.md
-[flux-cycles]: ./docs/flux-cycles.md
-[api-endpoints]: ./docs/api-endpoints.md
-[schema]: ./docs/schema.md
+The database is seeded with the ticker symbols of the most-valued companies in the world as "Stocks" in a `stocks` table.
+Each robinbanks `user` is created with an associated `list`. Adding a stock to that list creates a new associated row in a `stock_list_items` join table-- each row has a reference to a stock's ID and a list's ID.
 
-## Implementation Timeline
+When a user searches for a stock by its ticker, the stocks whose tickers match that query are selected using a SQL ILIKE statement (a LIKE statement that is indifferent to case) and the first ten of them are passed to the frontend as JSON.
 
-### Phase 1: Backend setup, User Authentication, and live on Heroku (1 day)
+When a user logs in, the stocks on that user's list are selected using an ActiveRecord query (user.list.stocks) and combined with both the current price and the past month's prices and passed to the frontend as JSON.
 
-**Objective:** Functioning rails project with Authentication
+Upon selecting a stock, the appropriate historical data (past month/3M/6M/1Y) are passed to the frontend, as are the most recently published news articles about that company.
 
-- [x] create new project
-- [x] create `User` model
-- [x] authentication
-- [x] user signup/signin pages
-- [x] blank landing page after signin with `logout` link
-- [x] page live on robinbanks.herokuapp.com
+The price data is retrieved from various Yahoo APIs:
+- the current price from Yahoo's finance API (https://finance.yahoo.com/webservice/v1/symbols/STOCK_TICKER/quote?format=json)
+- the historical price data from a variety of tables accessible via YQL (https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%20%22***STOCK_TICKER***%22%20and%20startDate%20%3D%20%22***START_DATE***%22%20and%20%20endDate%20%3D%20%22***END_DATE***%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys)
+- the related news articles from Yahoo Finance's RSS feed API (http://feeds.finance.yahoo.com/rss/2.0/headline?s=GOOG&region=US&lang=en-US) 
 
-### Phase 2: Stocks, List, and StockListItems Models & API (1 day)
+Once the data reach the frontend, they are handled by the appropriate stores:
+- the ListStore holds all of the data that the list needs: the stocks (in order) and their related data.
+- the HistoricalPriceStore holds the data that the chart needs: the time-ordered price data consisting of the date and that date's closing price.
+- the NewsStore holds the data that the "Related News" section needs: the related headlines, URLs, and publishing dates of the most recently published articles about the selected company.
 
-**Objective:** Stocks and StockListItems can be created, read, edited and destroyed through
-the API.
+The Sparklines are made using the `react-sparklines` module.
 
-- [x] create `Stock` model
-- [x] create `List` model
-- [x] create `StockListItem` model
-- [x] seed the database with test data
-- [x] CRUD API for models (`StocksController`, `StockListItemsController`)
-- [x] generation of ordered array of stockListItems (from a linked list)
-- [x] jBuilder views for stocks, stockListItems
-- [x] test out API interaction with Postman
-
-### Phase 3: Internal APIUtils (.5 day)
-
-**Objective:** APIUtils provide methods to interact with internal APIs.
-
-- [x] set up APIUtils to interact with internal APIs
-- [x] test internal API interaction in the console
-
-### Phase 4: Flux Architecture and Router; implement StockList (.5 day)
-
-**Objective:** StockListItems can be read, edited and destroyed with the
-user interface.
-
-- [x] setup the flux loop with skeleton files
-- [x] setup React Router
-- [x] implement `StocksIndex` (without `StockPrice`s)
-
-### Phase 5: Outfit Basic Site with Styling (.5 day)
-
-**Objective:** Basic pages (including signup/signin, StocksIndex) will look good and follow the style guide.
-
-- [x] implement basic style guide
-- [x] position elements on the page
-- [x] style StocksIndex
-
-### Phase 6: StockSearch Flux Architecture and Router (.5 day)
-
-**Objective:** StockListItems can be created with the user interface.
-
-- [x] implement `StockSearchBar`
-
-### Phase 7: Outfit Search with Styling (.5 day)
-
-**Objective:** Search bar and results will look good and follow the style guide.
-
-- [x] style StockSearchBar and SearchBarSuggestions
-
-### Phase 8: External APIUtils (.5 day)
-
-**Objective:** APIUtils provide methods to interact with external APIs.
-
-- [x] set up APIUtils to interact with external APIs
-- [x] test external API interaction in the console
-
-### Phase 9: Flesh out Flux Architecture (1 day)
-
-**Objective:** Stocks and StockListItems display external data through the user interface.
-
-- implement basics of `StockDetail`
-  - [x] display current stock price information
-  - [x] acquire HistoricalStockPrice information
-  - [x] acquire StockNews information
-  - [x] create skeletons for StockCharts and StockNews
-
-### Phase 10: Implement StockDetail MVP (1.5 days)
-
-**Objective:** StockDetail shows StockCharts and StockNews
-
-- [x] implement chart plugin (React-Chart.js) with HistoricalStockPrice data
-- [x] implement StockNewsItems with StockNews data
-
-### Phase 11: Outfit Entire Site with Styling (1.5 days)
-
-**Objective:** All pages will look good and follow the style guide.
-
-- [x] position elements on the page
-- [x] style StockChart
-- [x] style StockNews
-- [ ] do a final style-check against the wireframes
-
-### Bonus Features (TBD)
-- [ ] Change time window for StockCharts (reveals a different StockChart)
-- [ ] Hover over StockChart displays snapshot of price information
-- [ ] In-app reader for news articles (the other end of the links in StockNews)
-- [ ] Multiple sessions
-- [ ] Sign in with Facebook/Github/Google
-
-[phase-one]: ./docs/phases/phase1.md
-[phase-two]: ./docs/phases/phase2.md
-[phase-three]: ./docs/phases/phase3.md
-[phase-four]: ./docs/phases/phase4.md
-[phase-five]: ./docs/phases/phase5.md
+The Chart is made using a custom-built Chart component that renders the data onto an HTML5 Canvas element, dynamically updates when it receives new data, and provides customizeable hover functionality.
