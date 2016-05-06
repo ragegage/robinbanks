@@ -15,15 +15,15 @@ Robinbanks allows you to sign up to save your data for later, or log in as a gue
 
 Robinbanks fetches your personal settings upon login, including your watchlist of stocks.
 ![index-screenshot]
-[index-screenshot]: ./index-screenshot.png
+[index-screenshot]: ./docs/index-screenshot.png
 
 Robinbanks lets you add and remove stocks from your watchlist.
 ![search-screenshot]
-[search-screenshot]: ./search-screenshot.png
+[search-screenshot]: ./docs/search-screenshot.png
 
 Robinbanks gives you day-by-day pricing data on an easy-to-read chart, as well as related news articles, for any of your stocks.
 ![stockshow-screenshot]
-[stockshow-screenshot]: ./stockshow-screenshot.png
+[stockshow-screenshot]: ./docs/stockshow-screenshot.png
 
 Robinbanks keeps your password data safe.
 ```ruby
