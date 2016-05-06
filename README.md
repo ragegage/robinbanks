@@ -3,7 +3,7 @@
 [live][robinbanks]
 [robinbanks]: http://www.robinbanks.herokuapp.com
 
-###Robinbanks provides you with live* data on all the stocks you might be interested in. Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
+####Robinbanks provides you with live* data on all the stocks you might be interested in. Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
 
 ##Features
 
