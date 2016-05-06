@@ -26,12 +26,15 @@ var Search = React.createClass({
   },
 
   onBlur: function(){
-    if(this.listener)
-      this.listener.remove();
-    this.setState({
-      results: [],
-      query: ""
-    });
+    var self = this;
+    setTimeout(function(){
+      if(self.listener)
+        self.listener.remove();
+      self.setState({
+        results: [],
+        query: ""
+      });
+    }, 200);
   },
 
   onChange: function(){
@@ -51,11 +54,12 @@ var Search = React.createClass({
     }
 
     return (
-      <div className="search" onMouseLeave={this.onBlur}>
+      <div className="search">
         <input type="text"
           value={this.state.query}
           onChange={this.queryChange}
           onFocus={this.onFocus}
+          onBlur={this.onBlur}
           placeholder="Find a Stock..."/>
         {results}
       </div>

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_one :list
 
   def password=(password)
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 

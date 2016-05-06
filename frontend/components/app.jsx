@@ -15,8 +15,8 @@ var App = React.createClass({
           {this.props.children}
         </div>
         {this.props.location.pathname === "/" ? (<video autoPlay loop id="bgvid">
-          <source src="dollars4.webm" type="video/webm" />
-          <source src="dollars4.mp4" type="video/mp4" />
+          <source src="dollars.webm" type="video/webm" />
+          <source src="dollars.mp4" type="video/mp4" />
         </video>) : ""}
       </div>
     );
