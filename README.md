@@ -49,4 +49,4 @@ The Sparklines are made using the `react-sparklines` module.
 
 The Chart is made using a custom-built Chart component that renders the data onto an HTML5 Canvas element, dynamically updates when it receives new data, and provides customizeable hover functionality.
 
-*data is not guaranteed to be live.
+*price data are not guaranteed to be live.
