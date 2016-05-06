@@ -11,7 +11,7 @@
 
 Robinbanks allows you to sign up to save your data for later, or log in as a guest user to quickly check the site out.
 ![login-screenshot]
-[login-screenshot]: ./login-screenshot.png
+[login-screenshot]: ./docs/login-screenshot.png
 
 Robinbanks fetches your personal settings upon login, including your watchlist of stocks.
 ![index-screenshot]
