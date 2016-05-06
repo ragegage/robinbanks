@@ -121,14 +121,7 @@ var StockChart = React.createClass({
     ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
   },
 
-  graphMouseMove: function(e, el){//is called from OwnGraph
-    e.preventDefault();
-    var elLocation = el.getBoundingClientRect().left;
-    var relativeLocation = e.pageX - elLocation;
-    var numPoints = this.state.historicalPriceData.length;
-    var elWidth = 600;
-    var hoverWidth = elWidth / numPoints;
-
+  graphMouseMove: function(relativeLocation, hoverWidth){//is called from OwnGraph
     var idx = Math.floor(relativeLocation / hoverWidth);
 
     console.log(this.state.historicalPriceData[idx]);
