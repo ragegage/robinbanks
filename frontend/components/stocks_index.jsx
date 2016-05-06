@@ -14,7 +14,8 @@ var StocksIndex = React.createClass({
     return {
       list: ListStore.list(),
       listErrors: ListStore.listErrors(),
-      selected: null
+      selected: null,
+      loading: true
     };
   },
 
@@ -40,7 +41,8 @@ var StocksIndex = React.createClass({
     console.log("stocksindex onchange fires "+ListStore.list());
     this.setState({
       list: ListStore.list(),
-      listErrors: ListStore.listErrors()
+      listErrors: ListStore.listErrors(),
+      loading: false
     });
     this.changeSelected();
   },
@@ -67,10 +69,19 @@ var StocksIndex = React.createClass({
       if(this.state.listErrors[0] === "Stock has already been taken")
         alert("You are already watching that stock!");
 
+    var loader = (
+      <div className="loader">
+        <div className="bounce1"></div>
+        <div className="bounce2"></div>
+        <div className="bounce3"></div>
+      </div>
+    );
+
     return (
       <div className="stock-list">
         {this.props.currentUser ? <Search /> : ""}
-        <ul onDragOver={this.dragOver}>
+        <ul>
+          {this.state.loading ? loader : ""}
           {list}
         </ul>
       </div>

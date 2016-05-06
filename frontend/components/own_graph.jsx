@@ -11,7 +11,7 @@ var OwnGraph = React.createClass({
 
   render: function(){
     return (
-      <canvas onMouseMove={this.onMouseMove} ref="canvas" width={600} height={300}>
+      <canvas onMouseMove={this.onMouseMove} onMouseLeave={this.onMouseLeave} ref="canvas" width={600} height={300}>
       </canvas>
     );
   },
@@ -41,6 +41,10 @@ var OwnGraph = React.createClass({
 
   onMouseMove: function(e){
     this.props.onMouseMove(e, this.refs.canvas);
+  },
+
+  onMouseLeave: function(e){
+    this.props.onMouseLeave(e);
   }
 });
 

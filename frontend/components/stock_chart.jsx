@@ -52,7 +52,9 @@ var StockChart = React.createClass({
   },
 
   render: function(){
-    var currentPrice = this.state.tempCurrentPrice || this.state.currentPrice;
+    var currentPrice = (this.state.tempCurrentPrice ?
+                          this.state.tempCurrentPrice.close :
+                          this.state.currentPrice);
     if(this.state.historicalPriceData.length > 0)
       var priceChange = currentPrice - this.state.historicalPriceData[0].close
     else
@@ -70,7 +72,9 @@ var StockChart = React.createClass({
       </div>
     );
 
-    var graph = (<OwnGraph onMouseMove={this.graphMouseMove} data={prices} color={chartColor}
+    var graph = (<OwnGraph onMouseMove={this.graphMouseMove}
+                             onMouseLeave={this.graphMouseLeave}
+                             data={prices} color={chartColor}
                              width="600" height="300" />);
 
 
@@ -86,8 +90,9 @@ var StockChart = React.createClass({
               &nbsp;
               ({(100*(priceChange/currentPrice)).toFixed(2)}%)
             </span>
-            &nbsp;
-            PAST {this.state.view}
+            {this.state.tempCurrentPrice ?
+              " "+this.state.tempCurrentPrice.date :
+              " PAST "+this.state.view}
           </h4>
         </div>
         <div className="chart-chart">
@@ -116,7 +121,7 @@ var StockChart = React.createClass({
     ClientActions.fetchHistoricalPrices(this.props.ticker, e.target.text);
   },
 
-  graphMouseMove: function(e, el){
+  graphMouseMove: function(e, el){//is called from OwnGraph
     e.preventDefault();
     var elLocation = el.getBoundingClientRect().left;
     var relativeLocation = e.pageX - elLocation;
@@ -128,10 +133,15 @@ var StockChart = React.createClass({
 
     console.log(this.state.historicalPriceData[idx]);
 
-    if(idx < 3) idx = 0;
-    else idx = idx - 2;
+    // if(idx < 3) idx = 0;
+    // else idx = idx - 2;
 
-    this.setState({tempCurrentPrice: this.state.historicalPriceData[idx].close});
+    this.setState({tempCurrentPrice: this.state.historicalPriceData[idx]});
+  },
+
+  graphMouseLeave: function(e){//is called from OwnGraph
+    e.preventDefault();
+    this.setState({tempCurrentPrice: null});
   }
 });
 
