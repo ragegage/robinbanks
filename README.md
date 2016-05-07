@@ -108,7 +108,28 @@ The price data is retrieved from various Yahoo APIs:
     @errors << e2
   end
 ```
-- the related news articles from Yahoo Finance's RSS feed API (http://feeds.finance.yahoo.com/rss/2.0/headline?s=GOOG&region=US&lang=en-US) 
+- the related news articles from Yahoo Finance's RSS feed API
+```ruby
+def fetch_related_news ticker
+
+  url = "http://feeds.finance.yahoo.com/rss/2.0/headline?s="
+          .concat(ticker)
+          .concat("&region=US&lang=en-US")
+
+  string = HTTP.get(url).to_s
+
+
+  @feed = Feedjira::Feed.fetch_and_parse url
+
+  if @feed.entries.count.to_i > 0
+    @news = @feed.entries[0..5]
+  else
+    @news = nil
+    @errors = ["news could not be loaded"]
+  end
+
+end
+```
 
 Once the data reach the frontend, they are handled by the appropriate stores:
 - the ListStore holds all of the data that the list needs: the stocks (in order) and their related data.
