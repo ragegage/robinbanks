@@ -30,8 +30,8 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [x] Add and delete stocks to/from watchlist (MVP)
 - [x] Search for stocks by ticker symbol (MVP)
 - [x] View stock information (prices and relevant news) for an individual stock (MVP)
-- [ ] Change time window for an individual stock's price information (non-MVP, but expected)
-- [ ] On hover, display snapshot of price information for an individual stock at a point in time (non-MVP, but expected)
+- [x] Change time window for an individual stock's price information (non-MVP, but expected)
+- [x] On hover, display snapshot of price information for an individual stock at a point in time (non-MVP, but expected)
 
 ## Design Docs
 * [View Wireframes][views]
@@ -140,11 +140,11 @@ user interface.
 - [x] position elements on the page
 - [x] style StockChart
 - [x] style StockNews
-- [ ] do a final style-check against the wireframes
+- [x] do a final style-check against the wireframes
 
 ### Bonus Features (TBD)
-- [ ] Change time window for StockCharts (reveals a different StockChart)
-- [ ] Hover over StockChart displays snapshot of price information
+- [x] Change time window for StockCharts (reveals a different StockChart)
+- [x] Hover over StockChart displays snapshot of price information
 - [ ] In-app reader for news articles (the other end of the links in StockNews)
 - [ ] Multiple sessions
 - [ ] Sign in with Facebook/Github/Google
