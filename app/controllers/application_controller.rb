@@ -51,9 +51,10 @@ class ApplicationController < ActionController::Base
       @errors << e
     end
 
-    debugger
+    # debugger
 
-# TODO: i[0].stock.ticker_symbol can't read .stock from i[0]
+    # TODO: i[0].stock.ticker_symbol couldn't read .stock from i[0]
+
     # fetches monthly data for each element in array
     month_data_url = "https://query.yahooapis.com/v1/public/yql"
             .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20%20")
