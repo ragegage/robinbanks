@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
     # response's content type is "application/json;charset=UTF-8"
 
-    debugger
+    # debugger
 
     current_price_string = response.to_s
 
