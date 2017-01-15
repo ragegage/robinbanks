@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.4'
+ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
@@ -36,6 +36,7 @@ gem "http"
 
 gem "feedjira"
 
+gem 'rest-client'
 
 
 group :production do
