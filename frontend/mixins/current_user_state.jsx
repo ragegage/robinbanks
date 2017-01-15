@@ -31,8 +31,10 @@ var CurrentUserState = {
     if(currentUser)
       if(this.closeModal)
         this.closeModal();
-    if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id))
+    if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id)){
+      // debugger
       ClientActions.fetchCurrentList();
+    }
     // if(userErrors)
     //   this.setState({modal: true});
     // else if(currentUser && (!this.state.list || currentUser.id !== this.state.list.user_id))
