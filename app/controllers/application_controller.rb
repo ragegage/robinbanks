@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
             .concat("/quote?format=json")
 
 
-    response = RestClient.get(current_price_url)#, :user_agent => 'User-Agent', 'Mozilla/5.0 (Linux; Android 6.0; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36')
+    response = RestClient.get current_price_url, {accept: :json}#, :user_agent => 'User-Agent', 'Mozilla/5.0 (Linux; Android 6.0; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36')
 
 
     current_price_string = response.to_s
