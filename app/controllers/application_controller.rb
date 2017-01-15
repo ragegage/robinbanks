@@ -1,3 +1,4 @@
+require 'rest-client'
 require 'net/http'
 
 class ApplicationController < ActionController::Base
@@ -36,7 +37,12 @@ class ApplicationController < ActionController::Base
             .concat(@ordered_list.map(){|i| i.stock.ticker_symbol}.join(","))
             .concat("/quote?format=json")
 
-    current_price_string = HTTP.get(current_price_url).to_s
+
+    response = RestClient.get(current_price_url)#, :user_agent => 'User-Agent', 'Mozilla/5.0 (Linux; Android 6.0; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36')
+
+
+    current_price_string = response.to_s
+
 
     begin
       current_price_data = JSON.parse current_price_string
@@ -45,8 +51,9 @@ class ApplicationController < ActionController::Base
       @errors << e
     end
 
+    debugger
 
-
+# TODO: i[0].stock.ticker_symbol can't read .stock from i[0]
     # fetches monthly data for each element in array
     month_data_url = "https://query.yahooapis.com/v1/public/yql"
             .concat("?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20%20")
