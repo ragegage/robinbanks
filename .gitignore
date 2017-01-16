@@ -12,9 +12,12 @@
 !/log/.keep
 /tmp
 
-#Ignore sketch file
+# Ignore sketch file
 /docs/wireframes/GageProjRobinbanks.sketch
 
-#Ignore node_modules and bundle.js
+# Ignore node_modules and bundle.js
 /node_modules
 /app/assets/javascripts/bundle.js
+
+# Ignore byebug history
+.byebug_history

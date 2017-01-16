@@ -20,7 +20,6 @@ var StocksIndex = React.createClass({
   },
 
   componentDidMount: function(){
-    console.log("stocksindex didmount");
     this.listener = ListStore.addListener(this.onChange);
     // if(this.state.currentUser && (!this.state.list || this.state.currentUser.id !== this.state.list.user_id))
     //   ClientActions.fetchCurrentList();
@@ -28,7 +27,6 @@ var StocksIndex = React.createClass({
   },
 
   // componentWillReceiveProps: function(){
-  //   console.log("stocksindex didreceiveprops");
   //   this.listener = ListStore.addListener(this.onChange);
   //   ClientActions.fetchCurrentList();
   // },
@@ -38,7 +36,6 @@ var StocksIndex = React.createClass({
   },
 
   onChange: function(){
-    console.log("stocksindex onchange fires "+ListStore.list());
     this.setState({
       list: ListStore.list(),
       listErrors: ListStore.listErrors(),
@@ -77,7 +74,7 @@ var StocksIndex = React.createClass({
       </div>)
       :
       "");
-    
+
 
     return (
       <div className="stock-list">
@@ -91,7 +88,6 @@ var StocksIndex = React.createClass({
   },
 
   changeSelected: function(ticker_symbol){
-    console.log("changeSelected runs");
     if(this.state.list && this.state.list.length === 0){
       this.setState({selected: null});
       HashHistory.push("/");
