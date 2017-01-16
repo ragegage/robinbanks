@@ -58,17 +58,14 @@ var ApiUtil = {
 
   // internal data utils
   fetchList: function(){
-    console.log("apiutil.fetchlist");
     $.ajax({
       method: 'GET',
       url: 'api/list',
       data: {},
       success: function(currentList){
-        console.log("apiutil.fetchlist success");
         ServerActions.receiveCurrentList(currentList);
       },
       error: function(errors){
-        console.log("apiutil.fetchlist error");
         ServerActions.receiveListErrors(errors);
       }
     });
@@ -139,11 +136,9 @@ var ApiUtil = {
       url: 'api/historical_price_data',
       data: {ticker: ticker, range: range},
       success: function(priceData){
-        console.log("apiutil historicalprices success");
         ServerActions.receiveHistoricalPrices(priceData);
       },
       error: function(errors){
-        console.log("apiutil historicalprices success");
         ServerActions.receiveHistoricalPriceErrors(errors);
       }
     });
@@ -157,11 +152,9 @@ var ApiUtil = {
       url: 'api/news',
       data: {ticker: ticker},
       success: function(news){
-        console.log("apiutil news success");
         ServerActions.receiveNews(news);
       },
       error: function(errors){
-        console.log("apiutil news success");
         ServerActions.receiveNewsErrors(errors);
       }
     });
