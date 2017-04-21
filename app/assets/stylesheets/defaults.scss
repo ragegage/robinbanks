@@ -189,8 +189,19 @@ label{
   margin-right: 20px;
 }
 
+.stock-list > ul {
+  margin-top: 20px;
+}
+
 .stock-list, .search{
   width: 300px;
+}
+
+.search {
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .stock-list-item, .search-result-item, .news-result-item, .stock-news h2 {
@@ -239,6 +250,7 @@ li.placeholder:before{
 .stock-list-item{
   cursor: pointer;
   display: flex;
+  align-items: center;
   .list-item-delete{
     display:none;
   }
