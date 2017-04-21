@@ -2,9 +2,6 @@ var React = require('react');
 
 var OwnGraph = React.createClass({
   componentWillReceiveProps: function(newProps) {
-    console.log("owngraph wrprops");
-    console.log(newProps);
-    console.log(this.props);
     var ctx = this.refs.canvas.getContext('2d');
     this.drawLines(ctx, newProps);
   },
@@ -36,12 +33,11 @@ var OwnGraph = React.createClass({
     ctx.strokeStyle = color;
     ctx.stroke();
 
-    console.log(data);
   },
 
   drawReferenceLine: function(ctx, relativeLocation, hoverWidth){
     var lineLocation = Math.floor(relativeLocation / hoverWidth) * hoverWidth;
-    debugger;
+    // debugger;
     ctx.beginPath();
     ctx.moveTo(lineLocation, 0);
     ctx.lineTo(lineLocation, 300);

@@ -32,16 +32,13 @@ ListStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case ListConstants.RECEIVE_NEW_LIST:
     	replaceList(payload.list);
-      console.log("liststore.newlist emitchange");
       this.__emitChange();
       break;
     case ListConstants.RECEIVE_NEW_LIST_ITEM:
-      console.log("liststore.newlistitem emitchange");
     	addToList(payload.item);
       this.__emitChange();
       break;
     case ListConstants.ERROR:
-      console.log("liststore.error emitchange");
       setErrors(payload.errors);
       this.__emitChange();
       break;

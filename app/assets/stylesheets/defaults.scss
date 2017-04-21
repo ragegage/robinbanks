@@ -236,12 +236,17 @@ li.placeholder:before{
 
 .stock-list-item{
   cursor: pointer;
+  display: flex;
   .list-item-delete{
     display:none;
   }
   .ticker-symbol{
     display: inline-block;
     width:70px;
+  }
+  svg {
+    width: 90px;
+    height: 35px;
   }
 }
 .stock-list-item:hover {
@@ -253,6 +258,9 @@ li.placeholder:before{
     color: #8f8f8f;
     background-color: #fff;
     border: 1px solid #8f8f8f;
+  }
+  .list-item-delete:hover {
+    background-color: #ddd;
   }
   svg {
     display: none;

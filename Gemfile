@@ -36,6 +36,7 @@ gem "http"
 
 gem "feedjira"
 
+gem 'rest-client'
 
 
 group :production do

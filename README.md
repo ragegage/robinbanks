@@ -1,29 +1,24 @@
-![robinbanks-logo]
-[robinbanks-logo]: ./public/robinbanks.png
-[live][robinbanks]
-[robinbanks]: http://www.robinbanks.herokuapp.com
+![robinbanks-logo](./public/robinbanks.png)
 
-####Robinbanks provides you with live* data on all the stocks you might be interested in. 
-####Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. 
-####It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
+[live site](http://www.robinbanks.herokuapp.com)
 
-##Features
+#### Robinbanks provides you with live* data on all the stocks you might be interested in. 
+#### Sign up and add stocks to your watchlist to see snapshot summaries of their current prices as well as sparklines of their performance over the past month. 
+#### It's built on a Postgres/Rails/React stack, so it's solid, easily extendable, and highly efficient in your browser.
+
+## Features
 
 Robinbanks allows you to sign up to save your data for later, or log in as a guest user to quickly check the site out.<br>
-![login-screenshot]
-[login-screenshot]: ./docs/login-screenshot.png
+![login-screenshot](./docs/login-screenshot.png)
 
 Robinbanks fetches your personal settings upon login, including your watchlist of stocks.<br>
-![index-screenshot]
-[index-screenshot]: ./docs/index-screenshot.png
+![index-screenshot](./docs/index-screenshot.png)
 
 Robinbanks lets you add and remove stocks from your watchlist.<br>
-![search-screenshot]
-[search-screenshot]: ./docs/search-screenshot.png
+![search-screenshot](./docs/search-screenshot.png)
 
 Robinbanks gives you day-by-day pricing data on an easy-to-read chart, as well as related news articles, for any of your stocks.<br>
-![stockshow-screenshot]
-[stockshow-screenshot]: ./docs/stockshow-screenshot.png
+![stockshow-screenshot](./docs/stockshow-screenshot.png)
 
 Robinbanks keeps your password data safe.
 ```ruby
@@ -37,7 +32,7 @@ def is_password?(password)
 end
 ```
 
-##Implementation
+## Implementation
 
 The database is seeded with the ticker symbols of the most-valued companies in the world as "Stocks" in a `stocks` table.
 Each robinbanks `user` is created with an associated `list`. Adding a stock to that list creates a new associated row in a `stock_list_items` join table-- each row has a reference to a stock's ID and a list's ID.

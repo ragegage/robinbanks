@@ -36,13 +36,11 @@ var StockListItem = React.createClass({
   },
 
   delete: function(e){
-    console.log("stocklistitem delete called");
     e.preventDefault();
     ClientActions.removeListItem(this.props.item.id);
   },
 
   select: function(e){
-    console.log("stocklistitem select called");
     e.preventDefault();
     this.props.onSelect(this.props.item.ticker_symbol)
   }

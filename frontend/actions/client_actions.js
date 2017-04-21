@@ -2,7 +2,6 @@ var ApiUtil = require('./../util/api_util');
 
 var ClientActions = {
   fetchCurrentList: function(){
-    console.log("clientactions.fetchlist");
     ApiUtil.fetchList();
   },
 
