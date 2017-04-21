@@ -140,6 +140,7 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
 .stock-news{
   height: 300px;
   width: 600px;
+  overflow-y: auto;
 }
 .stock-news ul{
   display: flex;
