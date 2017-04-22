@@ -1,7 +1,8 @@
 var React = require('react');
 var CurrentUserState = require('./../mixins/current_user_state'),
     StocksIndex = require('./stocks_index'),
-    Nav = require('./nav');
+    Nav = require('./nav'),
+    Splash = require('./splash');
 
 var App = React.createClass({
   mixins: [CurrentUserState],
@@ -15,13 +16,7 @@ var App = React.createClass({
           {this.props.children}
         </div>
         {this.state.currentUser ? "" : (
-        <div className="fullscreen">
-          <video autoPlay loop id="bgvid">
-            <source src="dollars.webm" type="video/webm" />
-            <source src="dollars.mp4" type="video/mp4" />
-          </video>
-          <div className="splash-logo"></div>
-        </div>)}
+        <Splash />)}
       </div>
     );
   }
