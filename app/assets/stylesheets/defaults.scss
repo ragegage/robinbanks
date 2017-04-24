@@ -406,12 +406,25 @@ video#bgvid {
     padding: 12px;
     font-weight: 100;
   }
+  figure {
+    margin: 0;
+  }
+  figure > img {
+    max-width: calc(100vw - 80px);
+  }
 }
 .green {
   background-color: #21ce99;
   color: #fff;
 }
 .black {
-  background-color: #000;
+  background-color: #040d14;
   color: #fff;
+}
+
+.white img {
+  width: 300px;
+}
+.black img {
+  height: 250px;
 }
