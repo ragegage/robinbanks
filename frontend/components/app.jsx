@@ -9,7 +9,7 @@ var App = React.createClass({
 
   render: function(){
     return (
-      <div>
+      <div className="react-content">
         <Nav userErrors={this.state.userErrors} currentUser={this.state.currentUser} />
         <div className="stock-info">
           <StocksIndex userErrors={this.state.userErrors} currentUser={this.state.currentUser} />

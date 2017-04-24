@@ -18,6 +18,12 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   justify-content: center;
 }
 
+.react-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .login, .signup{
   display:flex;
   width:300px;
