@@ -62,7 +62,8 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   display: flex;
   justify-content: space-between;
   height: 60px;
-  min-width: 900px;
+  min-width: 600px;
+  max-width: 950px;
   position: relative;
   z-index: 10;
   padding: 20px 0;
@@ -382,6 +383,7 @@ video#bgvid {
 
 .section {
   h1, h2, h3, p {
+    text-align: center;
     font-family: Lato, "DIN Web", "DIN Alternate", sans-serif;
   }
   display: flex;
