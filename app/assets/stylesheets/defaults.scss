@@ -70,6 +70,7 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
   height: 60px;
   min-width: 600px;
   max-width: 950px;
+  width: 100%;
   position: relative;
   z-index: 10;
   padding: 20px 0;
@@ -413,12 +414,17 @@ video#bgvid {
   p {
     padding: 12px;
     font-weight: 100;
+    text-align: justify;
   }
   figure {
     margin: 0;
   }
   figure > img {
     max-width: calc(100vw - 80px);
+  }
+  a {
+    color: black;
+    text-decoration: none;
   }
 }
 .green {
