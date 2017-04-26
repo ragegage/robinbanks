@@ -84,6 +84,8 @@ html, body, div, h1, h2, h3, p, ul, li, button, input{
 
 .stock-info{
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
 }
 
 .stock-chart{
