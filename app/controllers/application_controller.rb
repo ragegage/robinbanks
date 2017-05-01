@@ -32,21 +32,24 @@ class ApplicationController < ActionController::Base
     end
 
 
+    begin
     # fetches current price for each element in array, zips the information
-    current_price_url = "https://finance.yahoo.com/webservice/v1/symbols/"
+      current_price_url = "https://finance.yahoo.com/webservice/v1/symbols/"
             .concat(@ordered_list.map(){|i| i.stock.ticker_symbol}.join(","))
             .concat("/quote?format=json")
 
 
-    # response = RestClient.get current_price_url, {accept: "application/json\;charset=UTF-8", user_agent: 'Mozilla/5.0 (Linux\; Android 6.0\; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36'}
-    response = RestClient.get current_price_url, {accept: "application/json;charset=UTF-8", user_agent: 'Mozilla/5.0 (Linux; Android 6.0; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36'}
+      # response = RestClient.get current_price_url, {accept: "application/json\;charset=UTF-8", user_agent: 'Mozilla/5.0 (Linux\; Android 6.0\; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36'}
+      response = RestClient.get current_price_url, {accept: "application/json;charset=UTF-8", user_agent: 'Mozilla/5.0 (Linux; Android 6.0; MotoE2(4G-LTE) Build/MPI24.65-39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36'}
 
-    # response's content type is "application/json;charset=UTF-8"
+      # response's content type is "application/json;charset=UTF-8"
 
-    # debugger
+      # debugger
 
-    current_price_string = response.to_s
-
+      current_price_string = response.to_s
+    rescue RestClient::NotFound => e
+      return @ordered_list = nil
+    end
 
     begin
       current_price_data = JSON.parse current_price_string
