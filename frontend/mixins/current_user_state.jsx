@@ -39,7 +39,6 @@ var CurrentUserState = {
     if(currentUser 
         && (!this.state.list || currentUser.id !== this.state.list.user_id)
         && !this.state.listErrors){
-      // debugger
       ClientActions.fetchCurrentList();
     }
     // if(userErrors)

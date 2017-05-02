@@ -37,7 +37,6 @@ var OwnGraph = React.createClass({
 
   drawReferenceLine: function(ctx, relativeLocation, hoverWidth){
     var lineLocation = Math.floor(relativeLocation / hoverWidth) * hoverWidth;
-    // debugger;
     ctx.beginPath();
     ctx.moveTo(lineLocation, 0);
     ctx.lineTo(lineLocation, 300);

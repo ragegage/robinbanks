@@ -44,8 +44,6 @@ class ApplicationController < ActionController::Base
 
       # response's content type is "application/json;charset=UTF-8"
 
-      # debugger
-
       current_price_string = response.to_s
     rescue RestClient::NotFound => e
       return @ordered_list = nil
@@ -57,8 +55,6 @@ class ApplicationController < ActionController::Base
     rescue JSON::ParserError => e
       @errors << e
     end
-
-    # debugger
 
     # TODO: i[0].stock.ticker_symbol couldn't read .stock from i[0]
 

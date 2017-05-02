@@ -42,6 +42,10 @@ ListStore.__onDispatch = function (payload) {
       setErrors(payload.errors);
       this.__emitChange();
       break;
+    case "LOGOUT":
+    	replaceList([]);
+      this.__emitChange();
+      break;
   }
 };
 
